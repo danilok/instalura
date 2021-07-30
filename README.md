@@ -13,8 +13,10 @@ Project of Advanced Front-End Bootcamp from Alura using the fabulous JAMStack.
 
 ## Resources
 
-- [Styled components](https://styled-components.com): utilises tagged template literals to style your components
+- [Styled components](https://styled-components.com): utilises tagged template literals to style your components.
+- [Styled normalize](https://www.npmjs.com/package/styled-normalize): CSS-normalize library for styled-components.
 - [lodash](https://lodash.com): A modern JavaScript utility library delivering modularity, performance & extras.
+- [Google Fonts](https://fonts.google.com): Making the web more beautiful, fast, and open through great typography.
 
 ## Test locally
 
