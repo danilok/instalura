@@ -1,5 +1,6 @@
 import styled, { css } from 'styled-components'
 import get from 'lodash/get'
+import { TextStyleVariantsMap } from '../../foundation/Text';
 
 const ButtonGhost = css`
   // arrow function
@@ -22,6 +23,9 @@ export const Button = styled.button`
   padding: 12px 26px;
   font-weight: bold;
   opacity: 1;
+
+  ${TextStyleVariantsMap.smallestException}
+
   border-radius: ${({ theme }) => theme.borderRadius};
   transition: ${({ theme }) => theme.transition};
   ${(props) => {
