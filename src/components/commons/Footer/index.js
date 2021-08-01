@@ -1,5 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
+import Text from '../../foundation/Text';
 
 const FooterWrapper = styled.footer`
   padding: 14px;
@@ -30,15 +31,15 @@ export default function Footer(props) {
       <a href="https://www.alura.com.br">
         <img src="https://www.alura.com.br/assets/img/alura-logo.svg" alt="Logo Alura" />
       </a>
-      <p>
+      <Text tag="p" variant="paragraph1">
         Orgulhosamente criado durante
         {' '}
         o
         {' '}
         <a href="https://wwww.alura.com.br">
-          <span>Bootcamp Alura JAM Stack</span>
+          <Text>Bootcamp Alura JAM Stack</Text>
         </a>
-      </p>
+      </Text>
     </FooterWrapper>
   )
 }
