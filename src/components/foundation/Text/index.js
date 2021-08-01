@@ -39,19 +39,28 @@ const TextBase = styled.span`
   ${({ variant }) => TextStyleVariantsMap[variant] }
 `;
 
-export default function Text({ tag, variant, children }) {
+export default function Text({ tag, variant, children, ...props }) {
   return (
     <TextBase
       as={tag}
-      variant={variant}>
+      variant={variant}
+      {...props}
+    >
       {children}
     </TextBase>
   )
 }
 
 Text.propTypes = {
-  tag: PropTypes.string,
-  variant: PropTypes.string,
+  tag: PropTypes.oneOf(['h1', 'h2', 'h3', 'h4', 'h5', 'p', 'li', 'a', 'span']),
+  variant: PropTypes.oneOf([
+    'paragraph1',
+    'paragraph2',
+    'title',
+    'titleXS',
+    'smallestException',
+    'subTitle',
+  ]),
   children: PropTypes.node.isRequired,
 }
 
