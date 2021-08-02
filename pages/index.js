@@ -1,4 +1,5 @@
 import React from 'react';
+import Image from 'next/image';
 import Menu from '../src/components/commons/Menu';
 import Footer from '../src/components/commons/Footer';
 import Text from '../src/components/foundation/Text';
@@ -73,7 +74,7 @@ export default function Home() {
           <Grid.Col
             value={{ xs: 12, md: 6 }}
           >
-            <img
+            <Image
               alt="Imagem de exemplo do Instalura"
               style={{ display: 'block', margin: 'auto' }}
               src="https://bootcamp-alura-01-git-modulo01.omariosouto.vercel.app/images/phones.png"

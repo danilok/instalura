@@ -42,7 +42,7 @@ const Col = styled.div`
   flex-grow: 1;
   max-width: 100%;
 
-  ${function ({ value }) {
+  ${({ value }) => {
     if (typeof value === 'number') {
       return css`
         flex-grow: 0;
@@ -96,7 +96,7 @@ const Col = styled.div`
     });
   }}
 
-  ${function ({ offset }) {
+  ${({ offset }) => {
     if (typeof offset === 'number') {
       return css`
         margin-left: ${(100 * offset) / 12}%;

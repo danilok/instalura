@@ -1,7 +1,10 @@
 /* eslint-disable react/jsx-props-no-spreading */
 import React from 'react';
-import Document from 'next/document';
+import Document, {
+  Html, Head, Main, NextScript,
+} from 'next/document';
 import { ServerStyleSheet } from 'styled-components';
+import AppHead from '../src/components/core/AppHead';
 
 export default class MyDocument extends Document {
   static async getInitialProps(ctx) {
@@ -26,5 +29,25 @@ export default class MyDocument extends Document {
     } finally {
       sheet.seal();
     }
+  }
+
+  // https://github.com/styled-components/styled-components/issues/3224
+  render() {
+    return (
+      <Html lang="en">
+        <AppHead />
+        <Head>
+          <link rel="preconnect" href="https://fonts.gstatic.com" />
+          <link
+            href="https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
+            rel="stylesheet"
+          />
+        </Head>
+        <body>
+          <Main />
+          <NextScript />
+        </body>
+      </Html>
+    );
   }
 }
