@@ -1,5 +1,6 @@
-import styled, { css } from 'styled-components'
-import breakpointsMedia from '../../../../theme/utils/breakpointsMedia'
+import styled, { css } from 'styled-components';
+import breakpointsMedia from '../../../../theme/utils/breakpointsMedia';
+import propToStyle from '../../../../theme/utils/propToStyle';
 
 const Container = styled.div`
   width: 100%;
@@ -26,10 +27,12 @@ const Container = styled.div`
     lg: css`
       max-width: 1160px;
     `,
-    md: css`
+    xl: css`
       max-width: 1222px;
     `,
   })}
+
+  ${propToStyle('marginTop')}
 `;
 
 const Col = styled.div`
@@ -39,14 +42,14 @@ const Col = styled.div`
   flex-grow: 1;
   max-width: 100%;
 
-  ${function({ value }) {
+  ${function ({ value }) {
     if (typeof value === 'number') {
       return css`
         flex-grow: 0;
         flex-shrink: 0;
         flex-basis: ${(100 * value) / 12}%;
         max-width: ${(100 * value) / 12}%;
-      `
+      `;
     }
 
     return breakpointsMedia({
@@ -90,14 +93,14 @@ const Col = styled.div`
           max-width: ${(100 * value.xl) / 12}%;
         `
         : '',
-    })
+    });
   }}
 
-  ${function({ offset }) {
+  ${function ({ offset }) {
     if (typeof offset === 'number') {
       return css`
         margin-left: ${(100 * offset) / 12}%;
-      `
+      `;
     }
 
     return breakpointsMedia({
@@ -126,8 +129,13 @@ const Col = styled.div`
           margin-left: ${(100 * offset.xl) / 12}%;
         `
         : '',
-    })
+    });
   }}
+
+  ${propToStyle('display')}
+  ${propToStyle('alignItems')}
+  ${propToStyle('justifyContent')}
+  ${propToStyle('flexDirection')}
 
   // Codigo do repositorio da aula
   /* ${({ value }) => {
@@ -207,7 +215,7 @@ const Col = styled.div`
   }} */
 `;
 
-export const Grid = {
+const Grid = {
   Container,
   Col,
   Row: styled.div`
@@ -216,9 +224,11 @@ export const Grid = {
     margin-right: -16px;
     margin-left: -16px;
   `,
-}
+};
 
 Col.defaultProps = {
   value: {},
   offset: {},
 };
+
+export { Grid as default };

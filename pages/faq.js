@@ -1,3 +1,5 @@
+import React from 'react';
+
 export default function FaqPage() {
-  return <div>FAQ</div>
+  return <div>FAQ</div>;
 }

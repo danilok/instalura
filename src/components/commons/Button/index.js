@@ -1,8 +1,8 @@
-import styled, { css } from 'styled-components'
-import get from 'lodash/get'
+import styled, { css } from 'styled-components';
+import get from 'lodash/get';
 import { TextStyleVariantsMap } from '../../foundation/Text';
 import breakpointsMedia from '../../../theme/utils/breakpointsMedia';
-import { propToStyle } from '../../../theme/utils/propToStyle';
+import propToStyle from '../../../theme/utils/propToStyle';
 
 const ButtonGhost = css`
   // arrow function
@@ -14,12 +14,10 @@ const ButtonDefault = css`
   // arrow function + destructuring
   background-color: ${({ theme, variant }) => get(theme, `colors.${variant}.color`)};
   // exemplo com keyword function
-  color: ${function (props) {
-    return get(props.theme, `colors.${props.variant}.contrastText`)
-  }};
+  color: ${(props) => get(props.theme, `colors.${props.variant}.contrastText`)};
 `;
 
-export const Button = styled.button`
+const Button = styled.button`
   border: 0;
   cursor: pointer;
   padding: 12px 26px;
@@ -53,3 +51,5 @@ export const Button = styled.button`
   ${propToStyle('margin')}
   ${propToStyle('display')}
 `;
+
+export default Button;

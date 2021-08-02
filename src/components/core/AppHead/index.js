@@ -1,3 +1,4 @@
+import React from 'react';
 import Head from 'next/head';
 
 export default function AppHead() {
@@ -10,7 +11,7 @@ export default function AppHead() {
       <meta property="og:description" content="Instalura - Compartilhe momentos e conecte-se com amigos" key="description" />
       <meta property="og:type" content="website" />
       <meta property="og:url" content="https://instalura-danilok.vercel.app" />
-      <meta property="og:image" content="https://instalura-danilok.vercel.app/homepage.png"></meta>
+      <meta property="og:image" content="https://instalura-danilok.vercel.app/homepage.png" />
       <link
         rel="icon"
         type="image/png"
@@ -36,5 +37,5 @@ export default function AppHead() {
       />
       <meta name="theme-color" content="#ffffff" />
     </Head>
-  )
+  );
 }
