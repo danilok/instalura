@@ -1,5 +1,5 @@
+/* eslint-disable @next/next/no-img-element */
 import React from 'react';
-import Image from 'next/image';
 import styled from 'styled-components';
 import Text from '../../foundation/Text';
 
@@ -31,7 +31,7 @@ export default function Footer(props) {
     // eslint-disable-next-line react/jsx-props-no-spreading
     <FooterWrapper {...props}>
       <a href="https://www.alura.com.br">
-        <Image
+        <img
           src="https://www.alura.com.br/assets/img/alura-logo.svg"
           alt="Logo Alura"
         />
