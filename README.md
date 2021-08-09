@@ -27,7 +27,7 @@ yarn dev
 
 ## Test online
 
-This project can be tested online, to access [click here](httpa://instalura-danilok.vercel.app).
+This project can be tested online, to access [click here](https://instalura-danilok.vercel.app).
 
 ## Credits
 
