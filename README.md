@@ -17,7 +17,8 @@ Project of Advanced Front-End Bootcamp from Alura using the fabulous JAMStack.
 - [Styled normalize](https://www.npmjs.com/package/styled-normalize): CSS-normalize library for styled-components.
 - [lodash](https://lodash.com): A modern JavaScript utility library delivering modularity, performance & extras.
 - [Google Fonts](https://fonts.google.com): Making the web more beautiful, fast, and open through great typography.
-- [prop-types](https://www.npmjs.com/package/prop-types): Runtime type checking for React props and similar objects. 
+- [prop-types](https://www.npmjs.com/package/prop-types): Runtime type checking for React props and similar objects.
+- [Framer Motion](https://www.framer.com/motion/): A production-ready motion library for React.
 
 ## Test locally
 
