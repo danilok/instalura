@@ -1,18 +1,27 @@
+/* eslint-disable indent */
 import React from 'react';
 import styled, { css } from 'styled-components';
 import PropTypes from 'prop-types';
+import get from 'lodash/get';
 import propToStyle from '../../../theme/utils/propToStyle';
+import breakpointsMedia from '../../../theme/utils/breakpointsMedia';
 
 export const TextStyleVariantsMap = {
   title: css`
-    font-size: ${({ theme }) => theme.typographyVariants.title.fontSize};
-    font-weight: ${({ theme }) => theme.typographyVariants.title.fontWeight};
-    line-height: ${({ theme }) => theme.typographyVariants.title.lineHeight};
-  `,
-  titleXS: css`
-    font-size: ${({ theme }) => theme.typographyVariants.titleXS.fontSize};
-    font-weight: ${({ theme }) => theme.typographyVariants.titleXS.fontWeight};
-    line-height: ${({ theme }) => theme.typographyVariants.titleXS.lineHeight};
+    ${({ theme }) => css`
+      font-size: ${theme.typographyVariants.titleXS.fontSize};
+      font-weight: ${theme.typographyVariants.titleXS.fontWeight};
+      line-height: ${theme.typographyVariants.titleXS.lineHeight};
+    `}
+    ${breakpointsMedia({
+      md: css`
+        ${({ theme }) => css`
+          font-size: ${theme.typographyVariants.title.fontSize};
+          font-weight: ${theme.typographyVariants.title.fontWeight};
+          line-height: ${theme.typographyVariants.title.lineHeight};
+        `}
+      `,
+    })}
   `,
   subTitle: css`
     font-size: ${({ theme }) => theme.typographyVariants.subTitle.fontSize};
@@ -38,7 +47,10 @@ export const TextStyleVariantsMap = {
 
 const TextBase = styled.span`
   ${({ variant }) => TextStyleVariantsMap[variant]}
+  color: ${(props) => get(props.theme, `colors.${props.color}.color`)};
   ${propToStyle('textAlign')}
+  ${propToStyle('marginBottom')}
+  ${propToStyle('margin')}
 `;
 
 export default function Text({
@@ -57,7 +69,7 @@ export default function Text({
 }
 
 Text.propTypes = {
-  tag: PropTypes.oneOf(['h1', 'h2', 'h3', 'h4', 'h5', 'p', 'li', 'a', 'span']),
+  tag: PropTypes.oneOf(['h1', 'h2', 'h3', 'h4', 'h5', 'p', 'li', 'a', 'span', 'input']),
   variant: PropTypes.oneOf([
     'paragraph1',
     'paragraph2',
@@ -66,12 +78,13 @@ Text.propTypes = {
     'smallestException',
     'subTitle',
   ]),
-  children: PropTypes.node.isRequired,
+  children: PropTypes.node,
 };
 
 Text.defaultProps = {
   tag: 'span',
   variant: 'paragraph1',
+  children: null,
 };
 
 // p1
