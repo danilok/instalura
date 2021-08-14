@@ -15,6 +15,7 @@ const ModalWrapper = styled.div`
   left: 0;
   margin: auto;
   overflow: scroll;
+  transition: .5s;
   z-index: ${({ theme }) => theme.zIndex.modal};
 
   ${({ isOpen }) => {
@@ -55,9 +56,13 @@ export default function Modal({ isOpen, onClose, children }) {
         variants={{
           open: {
             x: 0,
+            opacity: 1,
+            scale: 1,
           },
           closed: {
             x: '100%',
+            opacity: 0.4,
+            scale: 0.5,
           },
         }}
         animate={isOpen ? 'open' : 'closed'}
@@ -70,7 +75,10 @@ export default function Modal({ isOpen, onClose, children }) {
         }}
       >
         {children({
-          'data-modal-safe-area': 'true',
+          boxAttributes: {
+            'data-modal-safe-area': 'true',
+          },
+          onClose,
         })}
       </motion.div>
     </ModalWrapper>
