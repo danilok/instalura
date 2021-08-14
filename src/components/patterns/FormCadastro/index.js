@@ -1,9 +1,11 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import Button from '../../commons/Button';
 import TextField from '../../forms/TextField';
 import Box from '../../foundation/layout/Box';
 import Grid from '../../foundation/layout/Grid';
 import Text from '../../foundation/Text';
+import CloseButton from '../../commons/CloseButton';
 
 function FormContent() {
   const [userInfo, setUserInfo] = React.useState({
@@ -27,7 +29,6 @@ function FormContent() {
         event.preventDefault();
       }}
     >
-
       <Text
         variant="title"
         tag="h1"
@@ -75,6 +76,7 @@ function FormContent() {
 
 // eslint-disable-next-line react/prop-types
 export default function FormCadastro({ propsDoModal }) {
+  const { boxAttributes, onClose } = propsDoModal;
   return (
     <Grid.Row
       marginLeft={0}
@@ -84,7 +86,14 @@ export default function FormCadastro({ propsDoModal }) {
     >
       <Grid.Col
         display="flex"
-        paddingRight={{ md: '0' }}
+        paddingRight={{
+          xs: '0',
+          md: '0',
+        }}
+        paddingLeft={{
+          xs: '0',
+          md: '0',
+        }}
         flex={1}
         value={{
           xs: 12,
@@ -104,11 +113,22 @@ export default function FormCadastro({ propsDoModal }) {
           }}
           backgroundColor="white"
           // eslint-disable-next-line react/jsx-props-no-spreading
-          {...propsDoModal}
+          {...boxAttributes}
         >
+          <CloseButton onClose={onClose} />
+
           <FormContent />
         </Box>
       </Grid.Col>
     </Grid.Row>
   );
 }
+
+FormCadastro.propTypes = {
+  propsDoModal: PropTypes.shape({
+    boxAttributes: PropTypes.shape({
+      'data-modal-safe-area': PropTypes.string.isRequired,
+    }),
+    onClose: PropTypes.func,
+  }).isRequired,
+};
