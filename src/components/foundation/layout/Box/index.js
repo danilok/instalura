@@ -7,6 +7,7 @@ const Box = styled.div`
   ${propToStyle('flexWrap')}
   ${propToStyle('flexDirection')}
   ${propToStyle('justifyContent')}
+  ${propToStyle('alignItems')}
   ${propToStyle('backgroundColor')}
   ${propToStyle('backgroundImage')}
   ${propToStyle('backgroundPosition')}
