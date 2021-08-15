@@ -1,16 +1,41 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import successAnimation from './animations/success.json';
+import errorAnimation from './animations/error.json';
+import loadingAnimation from './animations/loading.json';
 import Button from '../../commons/Button';
 import TextField from '../../forms/TextField';
 import Box from '../../foundation/layout/Box';
 import Grid from '../../foundation/layout/Grid';
 import Text from '../../foundation/Text';
 import CloseButton from '../../commons/CloseButton';
+import FormFeedbackAnimation from '../FormFeedbackAnimation';
+
+const formStates = {
+  DEFAULT: 'DEFAULT',
+  LOADING: 'LOADING',
+  DONE: 'DONE',
+  ERROR: 'ERROR',
+};
+
+const messagesMap = {
+  success: 'Cadastro realizado com sucesso!',
+  loading: 'Validando cadastro...',
+  error: {
+    unique: 'Usuário informado já cadastrado!',
+    generic: 'Não foi possível cadastrar o usuário agora :(',
+  },
+};
 
 function FormContent() {
+  const [isFormSubmitted, setIsFormSubmitted] = React.useState(false);
+  const [submissionStatus, setSubmissionStatus] = React.useState(formStates.DEFAULT);
+  const [message, setMessage] = React.useState('');
   const [userInfo, setUserInfo] = React.useState({
-    email: 'danilo@email.com',
-    usuario: 'danilo',
+    usuario: '',
+    nome: '',
+    // usuario: 'danilo@email.com',
+    // nome: 'danilo',
   });
 
   function handleChange(event) {
@@ -21,12 +46,52 @@ function FormContent() {
     });
   }
 
-  const isFormValid = userInfo.usuario.length === 0 || userInfo.email.length === 0;
+  const isFormValid = userInfo.nome.length === 0 || userInfo.usuario.length === 0;
 
   return (
     <form
-      onSubmit={(event) => {
+      onSubmit={async (event) => {
         event.preventDefault();
+
+        setIsFormSubmitted(true);
+
+        // Data Transfer Object
+        const userDTO = {
+          username: userInfo.usuario,
+          name: userInfo.nome,
+        };
+
+        try {
+          setMessage(messagesMap.loading);
+          setSubmissionStatus(formStates.LOADING);
+          const respostaDoServidor = await fetch('https://instalura-api.vercel.app/api/users', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(userDTO),
+          });
+
+          if (!respostaDoServidor.ok) {
+            const respostaConvertidaDoErro = await respostaDoServidor.json();
+            const mensagem = messagesMap.error[respostaConvertidaDoErro.error.username.kind];
+            if (mensagem) {
+              throw new Error(mensagem);
+            }
+            throw new Error(messagesMap.error.generic);
+          }
+
+          // const respostaConvertidaEmObjeto = await respostaDoServidor.json();
+          setTimeout(() => {
+            setMessage(messagesMap.success);
+            setSubmissionStatus(formStates.DONE);
+          }, 1000);
+        } catch (error) {
+          setTimeout(() => {
+            setMessage(error.message);
+            setSubmissionStatus(formStates.ERROR);
+          }, 1000);
+        }
       }}
     >
       <Text
@@ -48,17 +113,17 @@ function FormContent() {
       </Text>
       <div>
         <TextField
-          placeholder="Email"
-          name="email"
-          value={userInfo.email}
+          placeholder="Usuário"
+          name="usuario"
+          value={userInfo.usuario}
           onChange={handleChange}
         />
       </div>
       <div>
         <TextField
-          placeholder="Usuário"
-          name="usuario"
-          value={userInfo.usuario}
+          placeholder="Nome"
+          name="nome"
+          value={userInfo.nome}
           onChange={handleChange}
         />
       </div>
@@ -70,6 +135,28 @@ function FormContent() {
       >
         Cadastrar
       </Button>
+
+      {isFormSubmitted && submissionStatus === formStates.LOADING && (
+        <FormFeedbackAnimation
+          config={{ animationData: loadingAnimation, loop: true, autoplay: true }}
+          message={message}
+        />
+      )}
+
+      {isFormSubmitted && submissionStatus === formStates.DONE && (
+
+        <FormFeedbackAnimation
+          config={{ animationData: successAnimation, loop: false, autoplay: true }}
+          message={message}
+        />
+      )}
+
+      {isFormSubmitted && submissionStatus === formStates.ERROR && (
+        <FormFeedbackAnimation
+          config={{ animationData: errorAnimation, loop: false, autoplay: true }}
+          message={message}
+        />
+      )}
     </form>
   );
 }
