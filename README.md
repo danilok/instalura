@@ -19,6 +19,7 @@ Project of Advanced Front-End Bootcamp from Alura using the fabulous JAMStack.
 - [Google Fonts](https://fonts.google.com): Making the web more beautiful, fast, and open through great typography.
 - [prop-types](https://www.npmjs.com/package/prop-types): Runtime type checking for React props and similar objects.
 - [Framer Motion](https://www.framer.com/motion/): A production-ready motion library for React.
+- [Lottie](https://github.com/crello/react-lottie): React/Typescript wrapper for awesome Airbnb's lottie-web lib.
 
 ## Test locally
 
