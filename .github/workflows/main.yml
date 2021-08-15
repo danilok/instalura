@@ -29,6 +29,10 @@ jobs:
       # Prints out node version
       - name: Node Version
         run: node -v
+      # Install dependencies
+      - name: Instalação das dependencias
+        run: yarn install
       # Run linter
       - name: Roda o Linter!
         run: yarn lint
+
