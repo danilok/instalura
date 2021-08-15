@@ -26,7 +26,7 @@ jobs:
         with:
           node-version: '14.17.1'
 
-			# Prints out node version
+      # Prints out node version
       - name: Node Version
         run: node -v
       # Run linter
