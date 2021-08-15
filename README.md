@@ -20,6 +20,7 @@ Project of Advanced Front-End Bootcamp from Alura using the fabulous JAMStack.
 - [prop-types](https://www.npmjs.com/package/prop-types): Runtime type checking for React props and similar objects.
 - [Framer Motion](https://www.framer.com/motion/): A production-ready motion library for React.
 - [Lottie](https://github.com/crello/react-lottie): React/Typescript wrapper for awesome Airbnb's lottie-web lib.
+- [shelljs](https://www.npmjs.com/package/shelljs): ShellJS is a portable (Windows/Linux/OS X) implementation of Unix shell commands on top of the Node.js API.
 
 ## Test locally
 
