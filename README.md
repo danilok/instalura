@@ -20,7 +20,12 @@ Project of Advanced Front-End Bootcamp from Alura using the fabulous JAMStack.
 - [prop-types](https://www.npmjs.com/package/prop-types): Runtime type checking for React props and similar objects.
 - [Framer Motion](https://www.framer.com/motion/): A production-ready motion library for React.
 - [Lottie](https://github.com/crello/react-lottie): React/Typescript wrapper for awesome Airbnb's lottie-web lib.
+
+## Resources for CI/CD
 - [shelljs](https://www.npmjs.com/package/shelljs): ShellJS is a portable (Windows/Linux/OS X) implementation of Unix shell commands on top of the Node.js API.
+- [husky](https://www.npmjs.com/package/husky): Husky improves your commits and more 🐶 woof!
+- [commitizen](https://www.npmjs.com/package/commitizen): When you commit with Commitizen, you'll be prompted to fill out any required commit fields at commit time.
+- [commitlint](https://commitlint.js.org/#/): commitlint helps your team adhering to a commit convention.
 
 ## Test locally
 
