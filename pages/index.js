@@ -35,10 +35,7 @@ export default function Home() {
       </Modal>
 
       <Menu
-        isOpen={isModalOpen}
-        onClickCadastrar={() => {
-          setModalState(!isModalOpen);
-        }}
+        onCadastrarClick={() => setModalState(true)}
       />
 
       <Grid.Container

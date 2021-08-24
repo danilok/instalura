@@ -20,7 +20,7 @@ const links = [
   },
 ];
 
-export default function Menu({ isOpen, onClickCadastrar }) {
+export default function Menu({ onCadastrarClick }) {
   return (
     <MenuWrapper>
       <MenuWrapper.LeftSide>
@@ -45,9 +45,7 @@ export default function Menu({ isOpen, onClickCadastrar }) {
         </Button>
         <Button
           variant="primary.main"
-          onClick={() => {
-            onClickCadastrar(!isOpen);
-          }}
+          onClick={onCadastrarClick}
         >
           Cadastrar
         </Button>
@@ -57,6 +55,5 @@ export default function Menu({ isOpen, onClickCadastrar }) {
 }
 
 Menu.propTypes = {
-  isOpen: PropTypes.bool.isRequired,
-  onClickCadastrar: PropTypes.func.isRequired,
+  onCadastrarClick: PropTypes.func.isRequired,
 };
