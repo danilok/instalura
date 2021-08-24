@@ -3,6 +3,7 @@ import React from 'react';
 import styled, { css } from 'styled-components';
 import PropTypes from 'prop-types';
 import get from 'lodash/get';
+import Link from '../../commons/Link';
 import propToStyle from '../../../theme/utils/propToStyle';
 import breakpointsMedia from '../../../theme/utils/breakpointsMedia';
 
@@ -54,18 +55,34 @@ const TextBase = styled.span`
 `;
 
 export default function Text({
-  tag, variant, children, ...props
+  tag,
+  variant,
+  children,
+  href,
+  ...props
 }) {
-  return (
-    <TextBase
-      as={tag}
-      variant={variant}
-      // eslint-disable-next-line react/jsx-props-no-spreading
-      {...props}
-    >
-      {children}
-    </TextBase>
-  );
+  return href
+    ? (
+      <TextBase
+        as={Link}
+        variant={variant}
+        href={href}
+        // eslint-disable-next-line react/jsx-props-no-spreading
+        {...props}
+      >
+        {children}
+      </TextBase>
+    )
+    : (
+      <TextBase
+        as={tag}
+        variant={variant}
+        // eslint-disable-next-line react/jsx-props-no-spreading
+        {...props}
+      >
+        {children}
+      </TextBase>
+    );
 }
 
 Text.propTypes = {
@@ -79,12 +96,14 @@ Text.propTypes = {
     'subTitle',
   ]),
   children: PropTypes.node,
+  href: PropTypes.string,
 };
 
 Text.defaultProps = {
   tag: 'span',
   variant: 'paragraph1',
   children: null,
+  href: '',
 };
 
 // p1
