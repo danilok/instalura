@@ -4,7 +4,6 @@ import Document, {
   Html, Head, Main, NextScript,
 } from 'next/document';
 import { ServerStyleSheet } from 'styled-components';
-import AppHead from '../src/components/core/AppHead';
 
 export default class MyDocument extends Document {
   static async getInitialProps(ctx) {
@@ -35,7 +34,6 @@ export default class MyDocument extends Document {
   render() {
     return (
       <Html lang="en">
-        <AppHead />
         <Head>
           <link rel="preconnect" href="https://fonts.gstatic.com" />
           <link
