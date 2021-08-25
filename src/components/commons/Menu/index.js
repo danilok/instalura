@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import Logo from '../../../theme/Logo';
-import Text from '../../foundation/Text';
+import Link from '../Link';
 import Button from '../Button';
 import MenuWrapper from './styles/MenuWrapper';
 
@@ -20,7 +20,7 @@ const links = [
   },
 ];
 
-export default function Menu({ isOpen, onClickCadastrar }) {
+export default function Menu({ onCadastrarClick }) {
   return (
     <MenuWrapper>
       <MenuWrapper.LeftSide>
@@ -29,21 +29,23 @@ export default function Menu({ isOpen, onClickCadastrar }) {
       <MenuWrapper.CentralSide>
         {links.map((link) => (
           <li key={link.url}>
-            <Text variant="smallestException" tag="a" href={link.url}>
+            <Link href={link.url}>
               {link.texto}
-            </Text>
+            </Link>
           </li>
         ))}
       </MenuWrapper.CentralSide>
       <MenuWrapper.RightSide>
-        <Button ghost variant="secondary.main">
+        <Button
+          ghost
+          variant="secondary.main"
+          href="/app/login"
+        >
           Entrar
         </Button>
         <Button
           variant="primary.main"
-          onClick={() => {
-            onClickCadastrar(!isOpen);
-          }}
+          onClick={onCadastrarClick}
         >
           Cadastrar
         </Button>
@@ -53,6 +55,5 @@ export default function Menu({ isOpen, onClickCadastrar }) {
 }
 
 Menu.propTypes = {
-  isOpen: PropTypes.bool.isRequired,
-  onClickCadastrar: PropTypes.func.isRequired,
+  onCadastrarClick: PropTypes.func.isRequired,
 };
