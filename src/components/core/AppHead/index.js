@@ -4,14 +4,6 @@ import Head from 'next/head';
 export default function AppHead() {
   return (
     <Head>
-      <title>Instalura</title>
-      <meta name="title" content="Instalura" />
-      <meta name="description" content="Instalura - Compartilhe momentos e conecte-se com amigos" />
-      <meta property="og:title" content="Instalura" key="title" />
-      <meta property="og:description" content="Instalura - Compartilhe momentos e conecte-se com amigos" key="description" />
-      <meta property="og:type" content="website" />
-      <meta property="og:url" content="https://instalura-danilok.vercel.app" />
-      <meta property="og:image" content="https://instalura-danilok.vercel.app/homepage.png" />
       <link
         rel="icon"
         type="image/png"
