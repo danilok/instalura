@@ -1,12 +1,13 @@
-import React from 'react';
 import FAQScreen from '../src/components/screens/FAQScreen';
+import websitePageHOC from '../src/components/wrappers/WebsitePage/hoc';
 
-export default function FaqPage(props) {
-  return (
-    // eslint-disable-next-line react/jsx-props-no-spreading
-    <FAQScreen {...props} />
-  );
-}
+export default websitePageHOC(FAQScreen, {
+  pageWrapperProps: {
+    seoProps: {
+      headTitle: 'Perguntas Frequentes',
+    },
+  },
+});
 
 export async function getStaticProps() {
   const res = await fetch('https://instalura-api.vercel.app/api/content/faq');
