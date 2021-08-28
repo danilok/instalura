@@ -1,5 +1,5 @@
-import FAQScreen from '../src/components/screens/FAQScreen';
-import websitePageHOC from '../src/components/wrappers/WebsitePage/hoc';
+import FAQScreen from '../../src/components/screens/FAQScreen';
+import websitePageHOC from '../../src/components/wrappers/WebsitePage/hoc';
 
 export default websitePageHOC(FAQScreen, {
   pageWrapperProps: {
