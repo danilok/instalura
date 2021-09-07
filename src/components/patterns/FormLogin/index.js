@@ -1,36 +1,44 @@
 /* eslint-disable @next/next/no-img-element */
 import React from 'react';
+import { useRouter } from 'next/router';
 import Button from '../../commons/Button';
 import TextField from '../../forms/TextField';
+import useForm from '../../../infra/hooks/form/useForm';
+import loginService from '../../../services/login/loginService';
 
 export default function FormLogin() {
-  const [loginInfo, setLoginInfo] = React.useState({
+  const router = useRouter();
+  const initialValues = {
     usuario: '',
     senha: '',
+  };
+  const form = useForm({
+    initialValues,
+    onSubmit: (values) => {
+      loginService.login({
+        username: values.usuario,
+        password: values.senha,
+      })
+        .then(() => {
+          router.push('/app/profile');
+        });
+    },
   });
 
-  function handleChange(event) {
-    const fieldName = event.target.getAttribute('name');
-    setLoginInfo({
-      ...loginInfo,
-      [fieldName]: event.target.value,
-    });
-  }
-
   return (
-    <form id="formCadastro" action="/app/profile">
+    <form id="formCadastro" onSubmit={form.handleSubmit}>
       <TextField
         placeholder="Usuário"
         name="usuario"
-        value={loginInfo.usuario}
-        onChange={handleChange}
+        value={form.values.usuario}
+        onChange={form.handleChange}
       />
       <TextField
         placeholder="Senha"
         name="senha"
         type="password"
-        value={loginInfo.senha}
-        onChange={handleChange}
+        value={form.values.senha}
+        onChange={form.handleChange}
       />
 
       <Button
