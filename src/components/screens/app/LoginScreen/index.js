@@ -1,12 +1,12 @@
 /* eslint-disable @next/next/no-img-element */
 import React from 'react';
-import Logo from '../../../theme/Logo';
-import Link from '../../commons/Link';
-import Box from '../../foundation/layout/Box';
-import Grid from '../../foundation/layout/Grid';
-import Text from '../../foundation/Text';
-import FormLogin from '../../patterns/FormLogin';
-import { WebsitePageContext } from '../../wrappers/WebsitePage';
+import Logo from '../../../../theme/Logo';
+import Link from '../../../commons/Link';
+import Box from '../../../foundation/layout/Box';
+import Grid from '../../../foundation/layout/Grid';
+import Text from '../../../foundation/Text';
+import FormLogin from '../../../patterns/FormLogin';
+import { WebsitePageContext } from '../../../wrappers/WebsitePage';
 
 export default function LoginScreen() {
   const websitePageContext = React.useContext(WebsitePageContext);
