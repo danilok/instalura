@@ -21,6 +21,9 @@ export default function FormLogin() {
       })
         .then(() => {
           router.push('/app/profile');
+        })
+        .catch((err) => {
+          console.log('Error: ', err);
         });
     },
   });
