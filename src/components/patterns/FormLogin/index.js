@@ -23,6 +23,7 @@ export default function FormLogin() {
           router.push('/app/profile');
         })
         .catch((err) => {
+          // eslint-disable-next-line no-console
           console.log('Error: ', err);
         });
     },

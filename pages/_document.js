@@ -1,4 +1,5 @@
 /* eslint-disable react/jsx-props-no-spreading */
+/* eslint-disable  @next/next/no-document-import-in-page */
 import React from 'react';
 import Document, {
   Html, Head, Main, NextScript,
