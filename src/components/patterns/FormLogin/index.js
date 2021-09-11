@@ -1,6 +1,7 @@
 /* eslint-disable @next/next/no-img-element */
 import React from 'react';
 import { useRouter } from 'next/router';
+import PropTypes from 'prop-types';
 import * as yup from 'yup';
 import Button from '../../commons/Button';
 import TextField from '../../forms/TextField';
@@ -18,7 +19,7 @@ const loginSchema = yup.object().shape({
     .min(8, 'Sua senha precisa ter ao menos 8 caracteres'),
 });
 
-export default function FormLogin() {
+export default function FormLogin({ onSubmit }) {
   const router = useRouter();
   const initialValues = {
     usuario: '',
@@ -28,6 +29,7 @@ export default function FormLogin() {
   const form = useForm({
     initialValues,
     onSubmit: (values) => {
+      form.setIsFormDisabled(true);
       loginService.login({
         username: values.usuario,
         password: values.senha,
@@ -36,15 +38,19 @@ export default function FormLogin() {
           router.push('/app/profile');
         })
         .catch((err) => {
+          // desafio: mostrar na tela
           // eslint-disable-next-line no-console
           console.log('Error: ', err);
+        })
+        .finally(() => {
+          form.setIsFormDisabled(false);
         });
     },
     validateSchema: async (values) => loginSchema.validate(values, { abortEarly: false }),
   });
 
   return (
-    <form id="formCadastro" onSubmit={form.handleSubmit}>
+    <form id="formCadastro" onSubmit={onSubmit || form.handleSubmit}>
       <TextField
         placeholder="Usuário"
         name="usuario"
@@ -80,3 +86,11 @@ export default function FormLogin() {
     </form>
   );
 }
+
+FormLogin.propTypes = {
+  onSubmit: PropTypes.func,
+};
+
+FormLogin.defaultProps = {
+  onSubmit: null,
+};

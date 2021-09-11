@@ -14,24 +14,27 @@ export default function useForm({
     senha: false,
   });
 
-  React.useEffect(() => {
-    validateSchema(values)
-      .then(() => {
-        setIsFormDisabled(false);
-        setErrors({});
-      })
-      .catch((err) => {
-        const formattedErrors = err.inner.reduce((errorObjectAcc, currentError) => {
-          const fieldName = currentError.path;
-          const errorMessage = currentError.message;
-          return {
-            ...errorObjectAcc,
-            [fieldName]: errorMessage,
-          };
-        }, {});
-        setErrors(formattedErrors);
-        setIsFormDisabled(true);
-      });
+  async function validate(currentValues) {
+    try {
+      await validateSchema(currentValues);
+      setIsFormDisabled(false);
+      setErrors({});
+    } catch (err) {
+      const formattedErrors = err.inner.reduce((errorObjectAcc, currentError) => {
+        const fieldName = currentError.path;
+        const errorMessage = currentError.message;
+        return {
+          ...errorObjectAcc,
+          [fieldName]: errorMessage,
+        };
+      }, {});
+      setErrors(formattedErrors);
+      setIsFormDisabled(true);
+    }
+  }
+
+  React.useEffect(async () => {
+    validate(values);
   }, [values]);
 
   return {
@@ -50,6 +53,7 @@ export default function useForm({
     },
     // Validação do Form
     isFormDisabled,
+    setIsFormDisabled,
     errors,
     touchedFields,
     handleBlur(event) {
