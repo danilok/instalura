@@ -17,7 +17,7 @@ export default function useForm({
   validateSchema,
 }) {
   const [values, setValues] = React.useState(initialValues);
-
+  const [isFormSubmitted, setIsFormSubmitted] = React.useState(false);
   const [isFormDisabled, setIsFormDisabled] = React.useState(true);
   const [errors, setErrors] = React.useState(initialValues);
   const [touchedFields, setTouchedFields] = React.useState({
@@ -45,9 +45,11 @@ export default function useForm({
     values,
     handleSubmit(event) {
       event.preventDefault();
+      setIsFormSubmitted(true);
       onSubmit(values);
     },
     handleChange(event) {
+      setIsFormSubmitted(false);
       const fieldName = event.target.getAttribute('name');
       const { value } = event.target;
       setValues((currentValues) => ({
@@ -58,6 +60,7 @@ export default function useForm({
     // Validação do Form
     isFormDisabled,
     setIsFormDisabled,
+    isFormSubmitted,
     errors,
     touchedFields,
     handleBlur(event) {

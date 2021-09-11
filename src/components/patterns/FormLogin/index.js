@@ -3,10 +3,20 @@ import React from 'react';
 import { useRouter } from 'next/router';
 import PropTypes from 'prop-types';
 import * as yup from 'yup';
+import errorAnimation from '../animations/error.json';
+import loadingAnimation from '../animations/loading.json';
 import Button from '../../commons/Button';
 import TextField from '../../forms/TextField';
 import useForm from '../../../infra/hooks/form/useForm';
 import loginService from '../../../services/login/loginService';
+import FormFeedbackAnimation from '../FormFeedbackAnimation';
+
+const formStates = {
+  DEFAULT: 'DEFAULT',
+  LOADING: 'LOADING',
+  DONE: 'DONE',
+  ERROR: 'ERROR',
+};
 
 const loginSchema = yup.object().shape({
   usuario: yup
@@ -20,6 +30,7 @@ const loginSchema = yup.object().shape({
 });
 
 export default function FormLogin({ onSubmit }) {
+  const [submissionStatus, setSubmissionStatus] = React.useState(formStates.DEFAULT);
   const router = useRouter();
   const initialValues = {
     usuario: '',
@@ -30,17 +41,17 @@ export default function FormLogin({ onSubmit }) {
     initialValues,
     onSubmit: (values) => {
       form.setIsFormDisabled(true);
+      setSubmissionStatus(formStates.LOADING);
       loginService.login({
         username: values.usuario,
         password: values.senha,
       })
         .then(() => {
+          setSubmissionStatus(formStates.DONE);
           router.push('/app/profile');
         })
-        .catch((err) => {
-          // desafio: mostrar na tela
-          // eslint-disable-next-line no-console
-          console.log('Error: ', err);
+        .catch(() => {
+          setSubmissionStatus(formStates.ERROR);
         })
         .finally(() => {
           form.setIsFormDisabled(false);
@@ -59,6 +70,7 @@ export default function FormLogin({ onSubmit }) {
         isTouched={form.touchedFields.usuario}
         onChange={form.handleChange}
         onBlur={form.handleBlur}
+        disabled={formStates.LOADING === submissionStatus}
       />
       <TextField
         placeholder="Senha"
@@ -69,6 +81,7 @@ export default function FormLogin({ onSubmit }) {
         isTouched={form.touchedFields.senha}
         onChange={form.handleChange}
         onBlur={form.handleBlur}
+        disabled={formStates.LOADING === submissionStatus}
       />
 
       <Button
@@ -83,6 +96,18 @@ export default function FormLogin({ onSubmit }) {
       >
         Entrar
       </Button>
+
+      {form.isFormSubmitted && submissionStatus === formStates.LOADING && (
+        <FormFeedbackAnimation
+          config={{ animationData: loadingAnimation, loop: true, autoplay: true }}
+        />
+      )}
+
+      {form.isFormSubmitted && submissionStatus === formStates.ERROR && (
+        <FormFeedbackAnimation
+          config={{ animationData: errorAnimation, loop: false, autoplay: true }}
+        />
+      )}
     </form>
   );
 }
