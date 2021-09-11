@@ -1,10 +1,22 @@
 /* eslint-disable @next/next/no-img-element */
 import React from 'react';
 import { useRouter } from 'next/router';
+import * as yup from 'yup';
 import Button from '../../commons/Button';
 import TextField from '../../forms/TextField';
 import useForm from '../../../infra/hooks/form/useForm';
 import loginService from '../../../services/login/loginService';
+
+const loginSchema = yup.object().shape({
+  usuario: yup
+    .string()
+    .required('"Usuário" é obrigatório')
+    .min(3, 'Preencha ao menos 3 caracteres'),
+  senha: yup
+    .string()
+    .required('"Senha" é obrigatória')
+    .min(8, 'Sua senha precisa ter ao menos 8 caracteres'),
+});
 
 export default function FormLogin() {
   const router = useRouter();
@@ -12,6 +24,7 @@ export default function FormLogin() {
     usuario: '',
     senha: '',
   };
+
   const form = useForm({
     initialValues,
     onSubmit: (values) => {
@@ -27,6 +40,7 @@ export default function FormLogin() {
           console.log('Error: ', err);
         });
     },
+    validateSchema: async (values) => loginSchema.validate(values, { abortEarly: false }),
   });
 
   return (
@@ -35,14 +49,20 @@ export default function FormLogin() {
         placeholder="Usuário"
         name="usuario"
         value={form.values.usuario}
+        error={form.errors.usuario}
+        isTouched={form.touchedFields.usuario}
         onChange={form.handleChange}
+        onBlur={form.handleBlur}
       />
       <TextField
         placeholder="Senha"
         name="senha"
         type="password"
         value={form.values.senha}
+        error={form.errors.senha}
+        isTouched={form.touchedFields.senha}
         onChange={form.handleChange}
+        onBlur={form.handleBlur}
       />
 
       <Button
@@ -53,6 +73,7 @@ export default function FormLogin() {
           md: 'initial',
         }}
         fullWidth
+        disabled={form.isFormDisabled}
       >
         Entrar
       </Button>
