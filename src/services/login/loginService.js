@@ -23,11 +23,14 @@ const BASE_URL = isStagingEnv
   // Back End de DEV
   ? 'https://instalura-api-git-master-omariosouto.vercel.app'
   // Back End de PROD
-  : 'https://instalura-api.omariosouto.vercel.app';
+  : 'https://instalura-api-git-master-omariosouto.vercel.app';
+  // : 'https://instalura-api.omariosouto.vercel.app';
 
 const loginService = {
-  async login({ username, password }) {
-    return HttpClient(`${BASE_URL}/api/login`, {
+  async login({ username, password },
+    setCookieModule = setCookie,
+    HttpClienteModule = HttpClient) {
+    return HttpClienteModule(`${BASE_URL}/api/login`, {
       method: 'POST',
       body: {
         username,
@@ -36,9 +39,14 @@ const loginService = {
     })
       .then((respostaConvertida) => {
         const { token } = respostaConvertida.data;
+        const hasToken = token;
+        if (!hasToken) {
+          throw new Error('Failed to login');
+        }
+
         const DAY_IN_SECONDS = 86400;
 
-        setCookie(null, 'APP_TOKEN', token, {
+        setCookieModule(null, 'APP_TOKEN', token, {
           path: '/',
           maxAge: DAY_IN_SECONDS * 7,
         });
@@ -48,8 +56,8 @@ const loginService = {
         };
       });
   },
-  logout() {
-    destroyCookie(null, 'APP_TOKEN');
+  async logout(destroyCookieModule = destroyCookie) {
+    destroyCookieModule(null, 'APP_TOKEN');
   },
 };
 
