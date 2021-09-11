@@ -23,7 +23,8 @@ const BASE_URL = isStagingEnv
   // Back End de DEV
   ? 'https://instalura-api-git-master-omariosouto.vercel.app'
   // Back End de PROD
-  : 'https://instalura-api.omariosouto.vercel.app';
+  : 'https://instalura-api-git-master-omariosouto.vercel.app';
+  // : 'https://instalura-api.omariosouto.vercel.app';
 
 const loginService = {
   async login({ username, password },
