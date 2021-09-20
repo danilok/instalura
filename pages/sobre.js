@@ -1,21 +1,47 @@
 import React from 'react';
-import styled from 'styled-components';
 import Box from '../src/components/foundation/layout/Box';
+import Grid from '../src/components/foundation/layout/Grid';
+import Text from '../src/components/foundation/Text';
 import websitePageHOC from '../src/components/wrappers/WebsitePage/hoc';
 
-const Title = styled.h1`
-  text-align: center;
-`;
-
-function AboutPage() {
+function AboutScreen() {
   return (
     <Box
       display="flex"
       flexDirection="column"
-      flex="1"
+      flex={1}
     >
-      <Title>Sobre</Title>
+      <Grid.Container>
+        <Grid.Row
+          marginTop={{ xs: '32px', md: '120px ' }}
+          flex="1"
+        >
+          <Grid.Col
+            value={{ xs: 12, md: 6, lg: 6 }}
+            offset={{ md: 2 }}
+            flex={1}
+          >
+            <Text
+              variant="title"
+              tag="h2"
+              color="tertiary.main"
+            >
+              Página Sobre
+            </Text>
+
+            <Box>
+              Conteúdo da página sobre
+            </Box>
+          </Grid.Col>
+        </Grid.Row>
+      </Grid.Container>
     </Box>
+  );
+}
+
+function AboutPage() {
+  return (
+    <AboutScreen />
   );
 }
 
@@ -23,6 +49,13 @@ export default websitePageHOC(AboutPage, {
   pageWrapperProps: {
     seoProps: {
       headTitle: 'Sobre',
+    },
+    pageBoxProps: {
+      flexWrap: 'wrap',
+      justifyContent: 'space-between',
+      backgroundImage: 'url(/images/bubbles.svg)',
+      backgroundRepeat: 'no-repeat',
+      backgroundPosition: 'bottom right',
     },
   },
 });
