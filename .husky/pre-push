@@ -4,3 +4,4 @@
 
 yarn lint
 yarn test
+yarn test:integration:build
