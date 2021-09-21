@@ -1,49 +1,15 @@
 import React from 'react';
-import Box from '../src/components/foundation/layout/Box';
-import Grid from '../src/components/foundation/layout/Grid';
-import Text from '../src/components/foundation/Text';
+import { GraphQLClient, gql } from 'graphql-request';
+import AboutScreen from '../src/components/screens/AbouScreen';
 import websitePageHOC from '../src/components/wrappers/WebsitePage/hoc';
 
-function AboutScreen() {
+function AboutPage({ messages }) {
   return (
-    <Box
-      display="flex"
-      flexDirection="column"
-      flex={1}
-    >
-      <Grid.Container>
-        <Grid.Row
-          marginTop={{ xs: '32px', md: '120px ' }}
-          flex="1"
-        >
-          <Grid.Col
-            value={{ xs: 12, md: 6, lg: 6 }}
-            offset={{ md: 2 }}
-            flex={1}
-          >
-            <Text
-              variant="title"
-              tag="h2"
-              color="tertiary.main"
-            >
-              Página Sobre
-            </Text>
-
-            <Box>
-              Conteúdo da página sobre
-            </Box>
-          </Grid.Col>
-        </Grid.Row>
-      </Grid.Container>
-    </Box>
+    <AboutScreen messages={messages} />
   );
 }
 
-function AboutPage() {
-  return (
-    <AboutScreen />
-  );
-}
+AboutPage.propTypes = AboutScreen.propTypes;
 
 export default websitePageHOC(AboutPage, {
   pageWrapperProps: {
@@ -59,3 +25,32 @@ export default websitePageHOC(AboutPage, {
     },
   },
 });
+
+export async function getStaticProps() {
+  const TOKEN = process.env.NEXT_PUBLIC_DATOCMS_KEY;
+
+  const DatoCMSURL = process.env.NEXT_PUBLIC_DATOCMS_URL;
+
+  const client = new GraphQLClient(DatoCMSURL, {
+    headers: {
+      Authorization: `Bearer ${TOKEN}`,
+    },
+  });
+
+  const query = gql`
+    query {
+      pageSobre(locale: pt_BR) {
+        pageTitle
+        pageDescription
+      }
+    }
+  `;
+
+  const messages = await client.request(query);
+
+  return {
+    props: {
+      messages,
+    },
+  };
+}
