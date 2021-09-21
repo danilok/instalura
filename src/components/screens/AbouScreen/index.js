@@ -3,6 +3,9 @@ import PropTypes from 'prop-types';
 import Box from '../../foundation/layout/Box';
 import Grid from '../../foundation/layout/Grid';
 import Text from '../../foundation/Text';
+import getContent from './getContent';
+
+export { getContent };
 
 export default function AboutScreen({ messages }) {
   return (
