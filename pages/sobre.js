@@ -1,6 +1,5 @@
 import React from 'react';
-import { GraphQLClient, gql } from 'graphql-request';
-import AboutScreen from '../src/components/screens/AbouScreen';
+import AboutScreen, { getContent } from '../src/components/screens/AbouScreen';
 import websitePageHOC from '../src/components/wrappers/WebsitePage/hoc';
 
 function AboutPage({ messages }) {
@@ -27,26 +26,7 @@ export default websitePageHOC(AboutPage, {
 });
 
 export async function getStaticProps() {
-  const TOKEN = process.env.NEXT_PUBLIC_DATOCMS_KEY;
-
-  const DatoCMSURL = process.env.NEXT_PUBLIC_DATOCMS_URL;
-
-  const client = new GraphQLClient(DatoCMSURL, {
-    headers: {
-      Authorization: `Bearer ${TOKEN}`,
-    },
-  });
-
-  const query = gql`
-    query {
-      pageSobre(locale: pt_BR) {
-        pageTitle
-        pageDescription
-      }
-    }
-  `;
-
-  const messages = await client.request(query);
+  const messages = await getContent();
 
   return {
     props: {
