@@ -1,16 +1,30 @@
 /* eslint-disable @next/next/no-img-element */
 import React from 'react';
 import authService from '../../src/services/auth/authService';
+import useUserService from '../../src/services/user/hook';
 import userService from '../../src/services/user/userService';
 
 export default function ProfilePage(props) {
+  const dados = useUserService.getProfilePage();
   return (
     <div>
       Página de Profile!
-      <pre>
-        {JSON.stringify(props, null, 4)}
-      </pre>
+      <br />
       <img src="https://media.giphy.com/media/bn0zlGb4LOyo8/giphy.gif" alt="Nicolas Cage" />
+      {dados.loading && 'Loading'}
+      {!dados.loading && dados.data && (
+        // 'Carregou os dados com sucesso'
+        <pre>
+          Props:
+          <br />
+          {JSON.stringify(props, null, 4)}
+          <br />
+          Service
+          <br />
+          {JSON.stringify(dados.data, null, 4)}
+        </pre>
+      )}
+      {!dados.loading && dados.error}
     </div>
   );
 }
