@@ -1,4 +1,4 @@
-import loginService from './loginService';
+import loginService, { LOGIN_APP_TOKEN_APP } from './loginService';
 
 const token = 'fake-token';
 async function HttpClientModule() {
@@ -30,7 +30,7 @@ describe('loginService()', () => {
           }, setCookieModule, HttpClientModule);
 
           expect(setCookieModule).toHaveBeenCalledWith(
-            null, 'APP_TOKEN', token, {
+            null, LOGIN_APP_TOKEN_APP, token, {
               path: '/',
               maxAge: 604800,
             },
@@ -56,8 +56,8 @@ describe('loginService()', () => {
     describe('when user try to logout and succeed', () => {
       test('remove its token', async () => {
         const destroyCookie = jest.fn();
-        await loginService.logout(destroyCookie);
-        expect(destroyCookie).toHaveBeenCalledWith(null, 'APP_TOKEN');
+        await loginService.logout(null, destroyCookie);
+        expect(destroyCookie).toHaveBeenCalledWith(null, LOGIN_APP_TOKEN_APP, { path: '/' });
       });
     });
   });
