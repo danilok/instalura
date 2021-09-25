@@ -1,23 +1,6 @@
 import { setCookie, destroyCookie } from 'nookies';
 import isStagingEnv from '../../infra/env/isStagingEnv';
-
-async function HttpClient(url, { headers, body, ...options }) {
-  return fetch(url, {
-    headers: {
-      ...headers,
-      'Content-Type': 'application/json',
-    },
-    body: JSON.stringify(body),
-    ...options,
-  })
-    .then((respostaDoServidor) => {
-      if (respostaDoServidor.ok) {
-        return respostaDoServidor.json();
-      }
-
-      throw new Error('Erro ao autenticar');
-    });
-}
+import HttpClient from '../../infra/http/HttpClient';
 
 const BASE_URL = isStagingEnv
   // Back End de DEV
@@ -25,6 +8,8 @@ const BASE_URL = isStagingEnv
   // Back End de PROD
   : 'https://instalura-api-git-master-omariosouto.vercel.app';
   // : 'https://instalura-api.omariosouto.vercel.app';
+
+export const LOGIN_APP_TOKEN_APP = 'LOGIN_APP_TOKEN_APP';
 
 const loginService = {
   async login({ username, password },
@@ -46,7 +31,7 @@ const loginService = {
 
         const DAY_IN_SECONDS = 86400;
 
-        setCookieModule(null, 'APP_TOKEN', token, {
+        setCookieModule(null, LOGIN_APP_TOKEN_APP, token, {
           path: '/',
           maxAge: DAY_IN_SECONDS * 7,
         });
@@ -56,8 +41,8 @@ const loginService = {
         };
       });
   },
-  async logout(destroyCookieModule = destroyCookie) {
-    destroyCookieModule(null, 'APP_TOKEN');
+  async logout(ctx, destroyCookieModule = destroyCookie) {
+    destroyCookieModule(ctx, LOGIN_APP_TOKEN_APP, { path: '/' });
   },
 };
 
