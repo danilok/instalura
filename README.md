@@ -23,6 +23,7 @@ Project of Advanced Front-End Bootcamp from Alura using the fabulous JAMStack.
 [![Yarn Badge](https://img.shields.io/badge/Yarn-2C8EBB?style=for-the-badge&logo=yarn&logoColor=white)](https://yarnpkg.com)
 [![React Badge](https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB)](https://pt-br.reactjs.org)
 [![Nextjs Badge](https://img.shields.io/badge/next.js-000000?style=for-the-badge&logo=nextdotjs&logoColor=white)](https://nextjs.org)
+[![GraphQL Badge](https://img.shields.io/badge/GraphQl-E10098?style=for-the-badge&logo=graphql&logoColor=white)](https://graphql.org)
 
 <br>
 
@@ -59,6 +60,11 @@ Project of Advanced Front-End Bootcamp from Alura using the fabulous JAMStack.
 
 <br>
 
+# CMS
+This project consume data from [Dato CMS](https://www.datocms.com).
+
+<br>
+
 # 📋 Run locally
 
 ```
@@ -71,8 +77,19 @@ yarn install
 # run project
 yarn dev
 
-# acess page
+# access page
 http://localhost:3000/
+```
+
+<br>
+
+# Configuration
+## Environment variables
+
+```
+DATO_CMS_TOKEN=<dato_cms_token>
+NEXT_PUBLIC_DATOCMS_URL=https://graphql.datocms.com/
+PREVIEW_KEY=<key>
 ```
 
 <br>
