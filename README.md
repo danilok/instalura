@@ -52,7 +52,7 @@ Project of Advanced Front-End Bootcamp from Alura using the fabulous JAMStack.
 
 <br>
 
-# <img src="https://simpleicons.org/icons/nextdotjs.svg" width="32px" height="32px" /> Features from Next
+# <img src="https://simpleicons.org/icons/nextdotjs.svg" style="filter: invert(31%) sepia(0%) saturate(1%) hue-rotate(107deg) brightness(96%) contrast(88%);" width="24px" height="24px" /> Features from Next
 - Static pages generated dynamically
 - Static content
 - Navigation as SPA
@@ -60,8 +60,8 @@ Project of Advanced Front-End Bootcamp from Alura using the fabulous JAMStack.
 
 <br>
 
-# CMS
-This project consume data from [Dato CMS](https://www.datocms.com).
+# <img src="https://simpleicons.org/icons/datocms.svg" style="filter: invert(78%) sepia(40%) saturate(5743%) hue-rotate(322deg) brightness(95%) contrast(112%);" width="24px" height="24px" /> CMS
+This project consume data from [Dato CMS](https://www.datocms.com) using [GraphQL](https://graphql.org).
 
 <br>
 
@@ -83,7 +83,7 @@ http://localhost:3000/
 
 <br>
 
-# Configuration
+# ⚙️Configuration
 ## Environment variables
 
 ```
@@ -91,6 +91,10 @@ DATO_CMS_TOKEN=<dato_cms_token>
 NEXT_PUBLIC_DATOCMS_URL=https://graphql.datocms.com/
 PREVIEW_KEY=<key>
 ```
+These variables must be configured on:
+- `.env.local` file for local deployment
+- Github Secrets for Github Actions CI
+- Vercel Environment Variables for build/deploy on Vercel.
 
 <br>
 
