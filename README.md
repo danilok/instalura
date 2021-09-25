@@ -36,6 +36,8 @@ Project of Advanced Front-End Bootcamp from Alura using the fabulous JAMStack.
 - [Framer Motion](https://www.framer.com/motion/): A production-ready motion library for React.
 - [Lottie](https://github.com/crello/react-lottie): React/Typescript wrapper for awesome Airbnb's lottie-web lib.
 - [yup](https://github.com/jquense/yup): Yup is a JavaScript schema builder for value parsing and validation.
+- [graphql-request](https://www.npmjs.com/package/graphql-request): Minimal GraphQL client supporting Node and browsers for scripts or simple apps.
+- [jsonwebtoken](https://www.npmjs.com/package/jsonwebtoken): An implementation of JSON Web Tokens.
 
 <br>
 
