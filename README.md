@@ -23,6 +23,7 @@ Project of Advanced Front-End Bootcamp from Alura using the fabulous JAMStack.
 [![Yarn Badge](https://img.shields.io/badge/Yarn-2C8EBB?style=for-the-badge&logo=yarn&logoColor=white)](https://yarnpkg.com)
 [![React Badge](https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB)](https://pt-br.reactjs.org)
 [![Nextjs Badge](https://img.shields.io/badge/next.js-000000?style=for-the-badge&logo=nextdotjs&logoColor=white)](https://nextjs.org)
+[![GraphQL Badge](https://img.shields.io/badge/GraphQl-E10098?style=for-the-badge&logo=graphql&logoColor=white)](https://graphql.org)
 
 <br>
 
@@ -36,6 +37,8 @@ Project of Advanced Front-End Bootcamp from Alura using the fabulous JAMStack.
 - [Framer Motion](https://www.framer.com/motion/): A production-ready motion library for React.
 - [Lottie](https://github.com/crello/react-lottie): React/Typescript wrapper for awesome Airbnb's lottie-web lib.
 - [yup](https://github.com/jquense/yup): Yup is a JavaScript schema builder for value parsing and validation.
+- [graphql-request](https://www.npmjs.com/package/graphql-request): Minimal GraphQL client supporting Node and browsers for scripts or simple apps.
+- [jsonwebtoken](https://www.npmjs.com/package/jsonwebtoken): An implementation of JSON Web Tokens.
 
 <br>
 
@@ -49,11 +52,16 @@ Project of Advanced Front-End Bootcamp from Alura using the fabulous JAMStack.
 
 <br>
 
-# <img src="https://simpleicons.org/icons/nextdotjs.svg" width="32px" height="32px" /> Features from Next
+# <img src="https://simpleicons.org/icons/nextdotjs.svg" style="filter: invert(31%) sepia(0%) saturate(1%) hue-rotate(107deg) brightness(96%) contrast(88%);" width="24px" height="24px" /> Features from Next
 - Static pages generated dynamically
 - Static content
 - Navigation as SPA
 - Trailing slash as default for project pages using `next.config.js`
+
+<br>
+
+# <img src="https://simpleicons.org/icons/datocms.svg" style="filter: invert(78%) sepia(40%) saturate(5743%) hue-rotate(322deg) brightness(95%) contrast(112%);" width="24px" height="24px" /> CMS
+This project consume data from [Dato CMS](https://www.datocms.com) using [GraphQL](https://graphql.org).
 
 <br>
 
@@ -69,9 +77,24 @@ yarn install
 # run project
 yarn dev
 
-# acess page
+# access page
 http://localhost:3000/
 ```
+
+<br>
+
+# ⚙️Configuration
+## Environment variables
+
+```
+DATO_CMS_TOKEN=<dato_cms_token>
+NEXT_PUBLIC_DATOCMS_URL=https://graphql.datocms.com/
+PREVIEW_KEY=<key>
+```
+These variables must be configured on:
+- `.env.local` file for local deployment
+- Github Secrets for Github Actions CI
+- Vercel Environment Variables for build/deploy on Vercel.
 
 <br>
 
