@@ -38,13 +38,13 @@ function FormContent() {
     // nome: 'danilo',
   });
 
-  function handleChange(event) {
+  const handleChange = React.useCallback((event) => {
     const fieldName = event.target.getAttribute('name');
     setUserInfo({
       ...userInfo,
       [fieldName]: event.target.value,
     });
-  }
+  }, [setUserInfo]);
 
   const isFormValid = userInfo.nome.length === 0 || userInfo.usuario.length === 0;
 
