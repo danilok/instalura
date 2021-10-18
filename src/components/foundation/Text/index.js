@@ -26,9 +26,20 @@ export const TextStyleVariantsMap = {
     })}
   `,
   subTitle: css`
-    font-size: ${({ theme }) => theme.typographyVariants.subTitle.fontSize};
-    font-weight: ${({ theme }) => theme.typographyVariants.subTitle.fontWeight};
-    line-height: ${({ theme }) => theme.typographyVariants.subTitle.lineHeight};
+    ${({ theme }) => css`
+      font-size: ${theme.typographyVariants.subTitleXS.fontSize};
+      font-weight: ${theme.typographyVariants.subTitleXS.fontWeight};
+      line-height: ${theme.typographyVariants.subTitleXS.lineHeight};
+    `}
+    ${breakpointsMedia({
+      md: css`
+        ${({ theme }) => css`
+          font-size: ${theme.typographyVariants.subTitle.fontSize};
+          font-weight: ${theme.typographyVariants.subTitle.fontWeight};
+          line-height: ${theme.typographyVariants.subTitle.lineHeight};
+        `}
+      `,
+    })}
   `,
   paragraph1: css`
     font-size: ${({ theme }) => theme.typographyVariants.paragraph1.fontSize};
@@ -44,6 +55,54 @@ export const TextStyleVariantsMap = {
     font-size: ${({ theme }) => theme.typographyVariants.smallestException.fontSize};
     font-weight: ${({ theme }) => theme.typographyVariants.smallestException.fontWeight};
     line-height: ${({ theme }) => theme.typographyVariants.smallestException.lineHeight};
+  `,
+  profileTitle: css`
+    ${({ theme }) => css`
+      font-size: ${theme.typographyVariants.profileTitleXS.fontSize};
+      font-weight: ${theme.typographyVariants.profileTitleXS.fontWeight};
+      line-height: ${theme.typographyVariants.profileTitleXS.lineHeight};
+    `}
+    ${breakpointsMedia({
+    md: css`
+        ${({ theme }) => css`
+          font-size: ${theme.typographyVariants.profileTitle.fontSize};
+          font-weight: ${theme.typographyVariants.profileTitle.fontWeight};
+          line-height: ${theme.typographyVariants.profileTitle.lineHeight};
+        `}
+      `,
+  })}
+  `,
+  profileInfo: css`
+    ${({ theme }) => css`
+      font-size: ${theme.typographyVariants.profileInfoXS.fontSize};
+      font-weight: ${theme.typographyVariants.profileInfoXS.fontWeight};
+      line-height: ${theme.typographyVariants.profileInfoXS.lineHeight};
+    `}
+    ${breakpointsMedia({
+    md: css`
+        ${({ theme }) => css`
+          font-size: ${theme.typographyVariants.profileInfo.fontSize};
+          font-weight: ${theme.typographyVariants.profileInfo.fontWeight};
+          line-height: ${theme.typographyVariants.profileInfo.lineHeight};
+        `}
+      `,
+  })}
+  `,
+  profileBio: css`
+    ${({ theme }) => css`
+      font-size: ${theme.typographyVariants.profileBioXS.fontSize};
+      font-weight: ${theme.typographyVariants.profileBioXS.fontWeight};
+      line-height: ${theme.typographyVariants.profileBioXS.lineHeight};
+    `}
+    ${breakpointsMedia({
+    md: css`
+        ${({ theme }) => css`
+          font-size: ${theme.typographyVariants.profileBio.fontSize};
+          font-weight: ${theme.typographyVariants.profileBio.fontWeight};
+          line-height: ${theme.typographyVariants.profileBio.lineHeight};
+        `}
+      `,
+  })}
   `,
 };
 
@@ -102,6 +161,9 @@ Text.propTypes = {
     'titleXS',
     'smallestException',
     'subTitle',
+    'profileBio',
+    'profileInfo',
+    'profileTitle',
   ]),
   children: PropTypes.node,
   href: PropTypes.string,

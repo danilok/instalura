@@ -15,6 +15,8 @@ const Container = styled.div`
 
       padding-right: 28px;
       padding-left: 28px;
+      ${propToStyle('paddingRight')}
+      ${propToStyle('paddingLeft')}
     `,
     sm: css`
       max-width: 576px;
@@ -23,12 +25,15 @@ const Container = styled.div`
       max-width: 768px;
       padding-right: 16px;
       padding-left: 16px;
+      ${propToStyle('maxWidth')}
     `,
     lg: css`
       max-width: 1160px;
+      ${propToStyle('maxWidth')}
     `,
     xl: css`
       max-width: 1222px;
+      ${propToStyle('maxWidth')}
     `,
   })}
 
@@ -139,8 +144,10 @@ const Col = styled.div`
   ${propToStyle('alignItems')}
   ${propToStyle('justifyContent')}
   ${propToStyle('flexDirection')}
+  ${propToStyle('flexGrow')}
   ${propToStyle('paddingRight')}
   ${propToStyle('paddingLeft')}
+  ${propToStyle('paddingTop')}
   ${propToStyle('marginBottom')}
   ${propToStyle('order')}
 
@@ -231,6 +238,7 @@ const Grid = {
     margin-right: -16px;
     margin-left: -16px;
 
+    ${propToStyle('display')}
     ${propToStyle('flex')}
     ${propToStyle('marginTop')}
     ${propToStyle('marginBottom')}

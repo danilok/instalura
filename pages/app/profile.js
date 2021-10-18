@@ -1,33 +1,26 @@
 /* eslint-disable @next/next/no-img-element */
 import React from 'react';
 import authService from '../../src/services/auth/authService';
-import useUserService from '../../src/services/user/hook';
 import userService from '../../src/services/user/userService';
+import LoggedPageHOC from '../../src/components/wrappers/LoggedPage/hoc';
+import ProfileScreen from '../../src/components/screens/ProfileScreen';
 
-export default function ProfilePage(props) {
-  const dados = useUserService.getProfilePage();
+function ProfilePage(props) {
   return (
-    <div>
-      Página de Profile!
-      <br />
-      <img src="https://media.giphy.com/media/bn0zlGb4LOyo8/giphy.gif" alt="Nicolas Cage" />
-      {dados.loading && 'Loading'}
-      {!dados.loading && dados.data && (
-        // 'Carregou os dados com sucesso'
-        <pre>
-          Props:
-          <br />
-          {JSON.stringify(props, null, 4)}
-          <br />
-          Service
-          <br />
-          {JSON.stringify(dados.data, null, 4)}
-        </pre>
-      )}
-      {!dados.loading && dados.error}
-    </div>
+    <ProfileScreen profileProps={props} />
   );
 }
+
+export default LoggedPageHOC(ProfilePage, {
+  pageWrapperProps: {
+    seoProps: {
+      headTitle: 'Perfil',
+    },
+    pageBoxProps: {
+      backgroundColor: '#E5E5E5',
+    },
+  },
+});
 
 export async function getServerSideProps(ctx) {
   const auth = authService(ctx);
@@ -37,13 +30,16 @@ export async function getServerSideProps(ctx) {
   if (hasActiveSession) {
     const session = await auth.getSession();
     const profilePage = await user.getProfilePage();
+    const posts = profilePage.posts && profilePage.posts.length > 0
+      ? profilePage.posts.slice(0, 25)
+      : [];
     return {
       props: {
         user: {
           ...session,
           ...profilePage.user,
         },
-        posts: profilePage.posts,
+        posts,
       },
     };
   }
