@@ -12,7 +12,7 @@ const LoggedMenuWrapper = styled.div`
   justify-content: space-evenly;
   align-items: center;
   list-style: none;
-  z-index: 100;
+  z-index: 50;
 
   ${breakpointsMedia({
     xs: css`

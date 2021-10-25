@@ -34,6 +34,12 @@ export const ProfileRelationsBoxWrapper = styled(Box)`
     margin: 0;
     padding: 16px;
   }
+  figure {
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+  }
   img {
     object-fit: cover;
     background-position: center center;
@@ -83,7 +89,9 @@ export default function ProfileContent() {
               // eslint-disable-next-line no-underscore-dangle
               <li key={itemAtual._id}>
                 <a href={itemAtual.photoUrl}>
-                  <img src={itemAtual.photoUrl} alt={itemAtual.description} />
+                  <figure className={itemAtual.filter}>
+                    <img src={itemAtual.photoUrl} alt={itemAtual.description} />
+                  </figure>
                 </a>
               </li>
             ))}

@@ -9,7 +9,7 @@ const LoggedMenuWrapper = styled.div`
   top: 0;
   display: flex;
   list-style: none;
-  z-index: 100;
+  z-index: 50;
 
   ${breakpointsMedia({
     xs: css`

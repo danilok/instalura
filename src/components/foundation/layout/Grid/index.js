@@ -150,6 +150,7 @@ const Col = styled.div`
   ${propToStyle('paddingTop')}
   ${propToStyle('marginBottom')}
   ${propToStyle('order')}
+  ${propToStyle('height')}
 
   // Codigo do repositorio da aula
   /* ${({ value }) => {
@@ -245,6 +246,7 @@ const Grid = {
     ${propToStyle('marginLeft')}
     ${propToStyle('marginRight')}
     ${propToStyle('justifyContent')}
+    ${propToStyle('alignItems')}
     ${propToStyle('flexDirection')}
   `,
 };

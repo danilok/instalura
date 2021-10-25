@@ -6,6 +6,8 @@ import SEO from '../../commons/SEO';
 import LoggedPageContext from './context';
 import LoggedMenu from '../../commons/LoggedMenu';
 import LoggedMenuFooter from '../../commons/LoggedMenuFooter';
+import ImageModal from '../../commons/ImageModal';
+import FormImagem from '../../patterns/FormImagem';
 
 export { LoggedPageContext };
 
@@ -38,13 +40,28 @@ export default function LoggedPageWrapper({
         {...pageBoxProps}
       >
         {menuProps.display && (
-          <LoggedMenu />
+          <LoggedMenu
+            onAdicionarClick={() => setModalState(true)}
+          />
         )}
+
+        <ImageModal
+          isOpen={isModalOpen}
+          onClose={() => {
+            setModalState(false);
+          }}
+        >
+          {(propsDoModal) => (
+            <FormImagem propsDoModal={propsDoModal} />
+          )}
+        </ImageModal>
 
         {children}
 
         {menuProps.display && (
-          <LoggedMenuFooter />
+          <LoggedMenuFooter
+            onAdicionarClick={() => setModalState(true)}
+          />
         )}
 
       </Box>

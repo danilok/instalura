@@ -31,7 +31,8 @@ export async function getServerSideProps(ctx) {
     const session = await auth.getSession();
     const profilePage = await user.getProfilePage();
     const posts = profilePage.posts && profilePage.posts.length > 0
-      ? profilePage.posts.slice(0, 25)
+      // ? profilePage.posts.slice(0, 25)
+      ? profilePage.posts
       : [];
     return {
       props: {
