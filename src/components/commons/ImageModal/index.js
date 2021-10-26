@@ -1,7 +1,6 @@
 import React from 'react';
 import styled, { css, createGlobalStyle } from 'styled-components';
 import { PropTypes } from 'prop-types';
-import { motion } from 'framer-motion';
 
 const ModalWrapper = styled.div`
   display: flex;
@@ -52,35 +51,12 @@ export default function ImageModal({ isOpen, onClose, children }) {
     >
       {isOpen && <LockScroll />}
 
-      <motion.div
-        variants={{
-          open: {
-            x: 0,
-            opacity: 1,
-            scale: 1,
-          },
-          closed: {
-            x: '100%',
-            opacity: 0.4,
-            scale: 0.5,
-          },
-        }}
-        animate={isOpen ? 'open' : 'closed'}
-        transition={{
-          duration: 0.5,
-        }}
-        style={{
-          display: 'flex',
-          flex: 1,
-        }}
-      >
-        {children({
-          boxAttributes: {
-            'data-modal-safe-area': 'true',
-          },
-          onClose,
-        })}
-      </motion.div>
+      {children({
+        boxAttributes: {
+          'data-modal-safe-area': 'true',
+        },
+        onClose,
+      })}
     </ModalWrapper>
   );
 }

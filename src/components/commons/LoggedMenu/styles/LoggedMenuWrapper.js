@@ -63,6 +63,10 @@ LoggedMenuWrapper.Nav = styled.nav`
     `,
   })}
 
+  button {
+    background-color: transparent;
+  }
+
   img {
     width: 32px;
     height: 32px;
@@ -70,7 +74,7 @@ LoggedMenuWrapper.Nav = styled.nav`
   }
 
   #home {
-    order: 2;
+    order: 3;
   }
 
   #search {

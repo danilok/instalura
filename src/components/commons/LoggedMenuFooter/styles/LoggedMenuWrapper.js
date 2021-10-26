@@ -55,6 +55,10 @@ LoggedMenuWrapper.Nav = styled.nav`
     height: 24px;
   }
 
+  button {
+    background-color: transparent;
+  }
+
   #home {
     order: 1;
   }

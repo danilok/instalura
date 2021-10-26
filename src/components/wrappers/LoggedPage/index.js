@@ -19,6 +19,7 @@ export default function LoggedPageWrapper({
   profileProps,
 }) {
   const [isModalOpen, setModalState] = React.useState(false);
+  const [posts, setPosts] = React.useState(profileProps.posts);
 
   return (
     <LoggedPageContext.Provider
@@ -26,7 +27,13 @@ export default function LoggedPageWrapper({
         toggleModalImagem: () => {
           setModalState(!isModalOpen);
         },
-        posts: profileProps.posts,
+        updatePosts: (post) => {
+          setPosts((currentValues) => ([
+            post,
+            ...currentValues,
+          ]));
+        },
+        posts,
       }}
     >
       <SEO

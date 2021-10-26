@@ -10,7 +10,7 @@ import Text from '../../foundation/Text';
 const ProfileContentWrapper = styled(Box)`
   display: flex;
   flex: 1;
-  flex-direction: column
+  flex-direction: column;
 `;
 
 export const ProfileRelationsBoxWrapper = styled(Box)`
@@ -33,6 +33,7 @@ export const ProfileRelationsBoxWrapper = styled(Box)`
     list-style: none;
     margin: 0;
     padding: 16px;
+    align-content: start;
   }
   figure {
     width: 100%;
@@ -62,7 +63,6 @@ export const ProfileRelationsBoxWrapper = styled(Box)`
 
 export default function ProfileContent() {
   const loggedPageContext = React.useContext(LoggedPageContext);
-
   return (
     <ProfileContentWrapper>
       <ProfileHeader />
@@ -85,16 +85,21 @@ export default function ProfileContent() {
         )}
         {loggedPageContext.posts.length > 0 && (
           <ul>
-            {loggedPageContext.posts.map((itemAtual) => (
-              // eslint-disable-next-line no-underscore-dangle
-              <li key={itemAtual._id}>
-                <a href={itemAtual.photoUrl}>
-                  <figure className={itemAtual.filter}>
-                    <img src={itemAtual.photoUrl} alt={itemAtual.description} />
-                  </figure>
-                </a>
-              </li>
-            ))}
+            {loggedPageContext.posts.map((itemAtual) => {
+              const filterName = itemAtual.filter.startsWith('filter-')
+                ? itemAtual.filter
+                : `filter-${itemAtual.filter}`;
+              return (
+                // eslint-disable-next-line no-underscore-dangle
+                <li key={itemAtual._id}>
+                  <a href={itemAtual.photoUrl}>
+                    <figure className={filterName}>
+                      <img src={itemAtual.photoUrl} alt={itemAtual.description} />
+                    </figure>
+                  </a>
+                </li>
+              );
+            })}
           </ul>
         )}
       </ProfileRelationsBoxWrapper>

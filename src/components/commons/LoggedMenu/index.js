@@ -13,17 +13,19 @@ export default function LoggedMenu({ onAdicionarClick }) {
         <Logo />
       </LoggedMenuWrapper.Logo>
       <LoggedMenuWrapper.Nav>
+        <li id="search"><img src="/images/search.svg" alt="search" /></li>
+        <li id="search">
+          <Button
+            onClick={onAdicionarClick}
+          >
+            <img src="/images/postIcon.svg" alt="add" />
+          </Button>
+        </li>
         <li id="home">
           <Link href="/app/profile">
             <img src="/images/home.svg" alt="home" />
           </Link>
         </li>
-        <li id="search"><img src="/images/search.svg" alt="search" /></li>
-        <Button
-          onClick={onAdicionarClick}
-        >
-          <img src="/images/postIcon.svg" alt="add" />
-        </Button>
         <li id="like"><img src="/images/heart.svg" alt="like" /></li>
         <li id="avatar"><img src="/images/avatar.png" alt="avatar" /></li>
       </LoggedMenuWrapper.Nav>

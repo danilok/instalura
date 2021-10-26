@@ -4,21 +4,17 @@ import styled, { css } from 'styled-components';
 import PropTypes from 'prop-types';
 import get from 'lodash/get';
 // import * as yup from 'yup';
-import successAnimation from '../animations/success.json';
-import errorAnimation from '../animations/error.json';
-import loadingAnimation from '../animations/loading.json';
 import Button from '../../commons/Button';
 import TextField from '../../forms/TextField';
 // import useForm from '../../../infra/hooks/form/useForm';
 // import loginService from '../../../services/login/loginService';
-import FormFeedbackAnimation from '../FormFeedbackAnimation';
 import Grid from '../../foundation/layout/Grid';
 import Box from '../../foundation/layout/Box';
-import CloseButton from '../../commons/CloseButton';
 import Text from '../../foundation/Text';
 import breakpointsMedia from '../../../theme/utils/breakpointsMedia';
 import FiltersSlider from '../../commons/FiltersSlider';
 import authService from '../../../services/auth/authService';
+import LoggedPageContext from '../../wrappers/LoggedPage/context';
 
 const formStates = {
   DEFAULT: 'DEFAULT',
@@ -28,13 +24,16 @@ const formStates = {
 };
 
 const messagesMap = {
-  success: 'Cadastro realizado com sucesso!',
-  loading: 'Validando cadastro...',
+  success: 'Post criado com sucesso!',
+  loading: 'Criando post...',
   error: {
-    unique: 'Usuário informado já cadastrado!',
-    generic: 'Não foi possível cadastrar o usuário agora :(',
+    generic: 'Erro ao criar post :(',
   },
 };
+
+const Form = styled.form`
+  padding-top: 40px;
+`;
 
 const ImagePlaceholder = styled(Box)`
   background-color: ${(props) => get(props.theme, `colors.${props.color}.color`)};
@@ -71,6 +70,29 @@ const ImageForm = styled(Box)`
   padding: 16px;
 `;
 
+ImageForm.Message = styled.p`
+  text-align: center;
+`;
+
+const CloseButtonWrapper = styled.div`
+  position: relative;
+  top: 22px;
+  left: 88%;
+  cursor: pointer;
+`;
+
+function CloseImageButton({ onClose }) {
+  return (
+    <CloseButtonWrapper
+      onClick={() => {
+        onClose();
+      }}
+    >
+      <img src="/images/close_button.svg" alt="Fechar" />
+    </CloseButtonWrapper>
+  );
+}
+
 function FormContent() {
   const [isFormSubmitted, setIsFormSubmitted] = React.useState(false);
   const [submissionStatus, setSubmissionStatus] = React.useState(formStates.DEFAULT);
@@ -84,6 +106,7 @@ function FormContent() {
     // nome: 'danilo',
   });
   const [secondStep, setSecondStep] = React.useState(false);
+  const loggedPageContext = React.useContext(LoggedPageContext);
 
   const handleChange = React.useCallback((event) => {
     const fieldName = event.target.getAttribute('name');
@@ -116,7 +139,7 @@ function FormContent() {
   const isFormUrlValid = image.url.length === 0;
 
   return (
-    <form
+    <Form
       onSubmit={async (event) => {
         event.preventDefault();
 
@@ -150,7 +173,7 @@ function FormContent() {
             throw new Error(messagesMap.error.generic);
           }
 
-          // const respostaConvertidaEmObjeto = await respostaDoServidor.json();
+          const respostaConvertidaEmObjeto = await respostaDoServidor.json();
           setTimeout(() => {
             setMessage(messagesMap.success);
             setSubmissionStatus(formStates.DONE);
@@ -158,6 +181,7 @@ function FormContent() {
             setSelectedFilter('normal');
             setImage({ url: '', filter: '' });
             setSecondStep(false);
+            loggedPageContext.updatePosts(respostaConvertidaEmObjeto.data);
           }, 1000);
         } catch (error) {
           setTimeout(() => {
@@ -218,29 +242,25 @@ function FormContent() {
             </Button>
           </div>
         )}
+        {isFormSubmitted && submissionStatus === formStates.LOADING && (
+          <ImageForm.Message>
+            {message}
+          </ImageForm.Message>
+        )}
+
+        {isFormSubmitted && submissionStatus === formStates.DONE && (
+          <ImageForm.Message>
+            {message}
+          </ImageForm.Message>
+        )}
+
+        {isFormSubmitted && submissionStatus === formStates.ERROR && (
+          <ImageForm.Message>
+            {message}
+          </ImageForm.Message>
+        )}
       </ImageForm>
-      {isFormSubmitted && submissionStatus === formStates.LOADING && (
-        <FormFeedbackAnimation
-          config={{ animationData: loadingAnimation, loop: true, autoplay: true }}
-          message={message}
-        />
-      )}
-
-      {isFormSubmitted && submissionStatus === formStates.DONE && (
-
-        <FormFeedbackAnimation
-          config={{ animationData: successAnimation, loop: false, autoplay: true }}
-          message={message}
-        />
-      )}
-
-      {isFormSubmitted && submissionStatus === formStates.ERROR && (
-        <FormFeedbackAnimation
-          config={{ animationData: errorAnimation, loop: false, autoplay: true }}
-          message={message}
-        />
-      )}
-    </form>
+    </Form>
   );
 }
 
@@ -290,6 +310,11 @@ export default function FormImagem({ propsDoModal }) {
         xs: '0',
         md: '0',
       }}
+      maxWidth={{
+        md: '375px',
+        lg: '375px',
+        xl: '375px',
+      }}
     >
       <Grid.Row
         marginLeft={0}
@@ -329,7 +354,7 @@ export default function FormImagem({ propsDoModal }) {
             // eslint-disable-next-line react/jsx-props-no-spreading
             {...boxAttributes}
           >
-            <CloseButton onClose={onClose} />
+            <CloseImageButton onClose={onClose} />
 
             <FormContent />
           </Box>
@@ -347,4 +372,8 @@ FormImagem.propTypes = {
     onClose: PropTypes.func,
     onSubmit: PropTypes.func,
   }).isRequired,
+};
+
+CloseImageButton.propTypes = {
+  onClose: PropTypes.func.isRequired,
 };
