@@ -10,7 +10,7 @@ export default function LoggedMenuFooter({ onAdicionarClick }) {
     <LoggedMenuWrapper>
       <LoggedMenuWrapper.Nav>
         <li id="home">
-          <Link href="/app/profile">
+          <Link href="/app/home">
             <img src="/images/home.svg" alt="home" />
           </Link>
         </li>
@@ -23,7 +23,11 @@ export default function LoggedMenuFooter({ onAdicionarClick }) {
           </Button>
         </li>
         <li id="like"><img src="/images/heart.svg" alt="like" /></li>
-        <li id="avatar"><img src="/images/avatar.png" alt="avatar" /></li>
+        <li id="avatar">
+          <Link href="/app/profile">
+            <img src="/images/avatar.png" alt="avatar" />
+          </Link>
+        </li>
       </LoggedMenuWrapper.Nav>
     </LoggedMenuWrapper>
   );

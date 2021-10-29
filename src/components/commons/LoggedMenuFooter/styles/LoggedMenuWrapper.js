@@ -13,14 +13,10 @@ const LoggedMenuWrapper = styled.div`
   align-items: center;
   list-style: none;
   z-index: 50;
+  border-radius: 24px 24px 0 0;
+  box-shadow: 0px 0px 16px rgba(0, 0, 0, 0.04);
 
   ${breakpointsMedia({
-    xs: css`
-      bottom: 0;
-      border-radius: 24px 24px 0 0;
-      height: 64px;
-      box-shadow: 0px 0px 16px rgba(0, 0, 0, 0.04);
-    `,
     md: css`
       display: none;
     `,
@@ -35,7 +31,7 @@ LoggedMenuWrapper.Nav = styled.nav`
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 12px;
+  padding: 0 12px;
 
   ${breakpointsMedia({
     md: css`
