@@ -5,6 +5,8 @@ import Text from '../../foundation/Text';
 
 const GithubLinksWrapper = styled.div`
   max-width: 370px;
+  flex: 1;
+  margin: 0 12px;
 `;
 
 GithubLinksWrapper.List = styled.ul`
