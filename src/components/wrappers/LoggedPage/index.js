@@ -34,6 +34,7 @@ export default function LoggedPageWrapper({
           ]));
         },
         posts,
+        user: profileProps.user,
       }}
     >
       <SEO

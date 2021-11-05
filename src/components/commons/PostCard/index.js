@@ -1,3 +1,4 @@
+/* eslint-disable no-underscore-dangle */
 /* eslint-disable @next/next/no-img-element */
 import React from 'react';
 import styled, { css } from 'styled-components';
@@ -8,6 +9,7 @@ import breakpointsMedia from '../../../theme/utils/breakpointsMedia';
 import Box from '../../foundation/layout/Box';
 import Text from '../../foundation/Text';
 import ControlButton from './components/ControlButton';
+import postService from '../../../services/post/postService';
 
 const PostCardWrapper = styled(Box)`
   background-color: white;
@@ -60,6 +62,10 @@ PostCardWrapper.PostImage = styled(Box)`
     padding: 0;
 
     position: relative;
+    &:hover + .hide,
+    &:focus + .hide {
+      display: block;
+    }
   }
 
   img {
@@ -69,6 +75,10 @@ PostCardWrapper.PostImage = styled(Box)`
     &:focus + .hide {
       display: block;
     }
+  }
+
+  .hide {
+    display: none;
   }
 
   button {
@@ -148,27 +158,46 @@ PostCardWrapper.Description = styled(Box)`
 `;
 
 export default function PostCard({
-  like,
-  username,
-  photoUrl,
-  description,
-  filter,
-  likes,
+  postProps,
 }) {
+  const { user, post, home } = postProps;
+  if (!user || !post) {
+    return (
+      <div>
+        Error
+      </div>
+    );
+  }
+  const like = post.likes && !!post.likes.find((v) => v.user === user.id);
   const [liked, setLiked] = React.useState(like);
   const [direction, setDirection] = React.useState(like === true ? '1' : '-1');
   const [displayModal, setDisplayModal] = React.useState(false);
-  const [likesValues, setLikesValues] = React.useState(likes.length === 0 ? '0' : likes.length.toString());
-  const filterName = filter.startsWith('filter-')
-    ? filter
-    : `filter-${filter}`;
+  const [likesValues, setLikesValues] = React.useState(post.likes.length);
+  const postSrv = postService();
+
+  const hasFilter = !!post.filter;
+  let filterName = 'filter-none';
+  if (hasFilter) {
+    filterName = post.filter.startsWith('filter-')
+      ? post.filter
+      : `filter-${post.filter}`;
+  }
 
   const onLikeClick = React.useCallback(() => {
-    const animationDirection = liked === true ? '-1' : '1';
-    const newLikesValues = liked === true ? +likesValues - 1 : +likesValues + 1;
-    setLiked(!liked);
-    setDirection(animationDirection);
-    setLikesValues(newLikesValues === '0' ? '0' : newLikesValues.toString());
+    postSrv.setLike(post._id)
+      .then(() => {
+        const animationDirection = liked === true ? '-1' : '1';
+        setLiked(!liked);
+        setDirection(animationDirection);
+        setLikesValues((value) => {
+          const newLikesValues = (liked === true) ? value - 1 : value + 1;
+          return newLikesValues;
+        });
+      })
+      .catch(() => {
+        // eslint-disable-next-line no-console
+        console.log('Deu ruim no like');
+      });
   }, [liked]);
 
   const onButtonClick = React.useCallback(() => {
@@ -182,8 +211,8 @@ export default function PostCard({
     <PostCardWrapper>
       <PostCardWrapper.Header>
         <PostCardWrapper.User>
-          <img src="https://avatars.githubusercontent.com/u/624381?v=4" alt="img" />
-          <span>{username}</span>
+          <img src={`https://i.pravatar.cc/150?u=${user.id}`} alt={user.username} />
+          <span>{user.username}</span>
         </PostCardWrapper.User>
         <button
           type="button"
@@ -194,57 +223,61 @@ export default function PostCard({
       </PostCardWrapper.Header>
       <PostCardWrapper.PostImage>
         <figure className={filterName}>
-          <img src={photoUrl} alt="img" />
-          <button
-            type="button"
-            className="hide"
-            onClick={onLikeClick}
-          >
-            <Lottie
-              width="64px"
-              height="64px"
-              // playingState={playingState}
-              direction={direction}
-              className="lottie-container basic container"
-              config={{ animationData: likeAnimation, loop: false, autoplay: true }}
-            />
-          </button>
+          <img src={post.photoUrl} alt="img" />
+          {!home && (
+            <button
+              type="button"
+              className="hide"
+              onClick={onLikeClick}
+            >
+              <Lottie
+                width="64px"
+                height="64px"
+                // playingState={playingState}
+                direction={direction}
+                className="lottie-container basic container"
+                config={{ animationData: likeAnimation, loop: false, autoplay: true }}
+              />
+            </button>
+          )}
         </figure>
       </PostCardWrapper.PostImage>
-      <PostCardWrapper.Controls>
-        <PostCardWrapper.ControlsLeftSide>
-          <ControlButton
-            onClick={onLikeClick}
-            value={likesValues}
-            direction={direction}
-            config={{ animationData: likeAnimation, loop: false, autoplay: true }}
-          />
-          <ControlButton
-            onClick={onButtonClick}
-            value="0"
-            icon="/images/message.svg"
-            alt="Comentários"
-          />
-          <ControlButton
-            onClick={onButtonClick}
-            icon="/images/send.svg"
-            alt="Share"
-          />
-        </PostCardWrapper.ControlsLeftSide>
-        <PostCardWrapper.ControlsRightSide>
-          <ControlButton
-            onClick={onButtonClick}
-            icon="/images/bookmark.svg"
-            alt="Share"
-          />
-        </PostCardWrapper.ControlsRightSide>
-      </PostCardWrapper.Controls>
+      {!home && (
+        <PostCardWrapper.Controls>
+          <PostCardWrapper.ControlsLeftSide>
+            <ControlButton
+              onClick={onLikeClick}
+              value={likesValues}
+              direction={direction}
+              config={{ animationData: likeAnimation, loop: false, autoplay: true }}
+            />
+            <ControlButton
+              onClick={onButtonClick}
+              value={0}
+              icon="/images/message.svg"
+              alt="Comentários"
+            />
+            <ControlButton
+              onClick={onButtonClick}
+              icon="/images/send.svg"
+              alt="Share"
+            />
+          </PostCardWrapper.ControlsLeftSide>
+          <PostCardWrapper.ControlsRightSide>
+            <ControlButton
+              onClick={onButtonClick}
+              icon="/images/bookmark.svg"
+              alt="Share"
+            />
+          </PostCardWrapper.ControlsRightSide>
+        </PostCardWrapper.Controls>
+      )}
       <PostCardWrapper.Description>
         <Text
           tag="span"
           variant="paragraph1"
         >
-          {description}
+          {post.description}
         </Text>
       </PostCardWrapper.Description>
       {displayModal && (
@@ -264,19 +297,28 @@ export default function PostCard({
 }
 
 PostCard.propTypes = {
-  like: PropTypes.bool,
-  username: PropTypes.string,
-  photoUrl: PropTypes.string,
-  description: PropTypes.string,
-  filter: PropTypes.string,
-  likes: PropTypes.arrayOf(PropTypes.string),
+  postProps: PropTypes.shape({
+    user: PropTypes.shape({
+      id: PropTypes.string,
+      username: PropTypes.string,
+    }).isRequired,
+    home: PropTypes.bool,
+    post: PropTypes.shape({
+      _id: PropTypes.string,
+      user: PropTypes.string,
+      description: PropTypes.string,
+      filter: PropTypes.string,
+      photoUrl: PropTypes.string,
+      likes: PropTypes.arrayOf(PropTypes.shape({
+        _id: PropTypes.string,
+        user: PropTypes.string,
+      })),
+    }).isRequired,
+  }),
 };
 
 PostCard.defaultProps = {
-  like: false,
-  username: 'username',
-  photoUrl: 'https://avatars.githubusercontent.com/u/624381?v=4',
-  description: 'Descrição',
-  filter: 'aden',
-  likes: [],
+  postProps: {
+    home: false,
+  },
 };

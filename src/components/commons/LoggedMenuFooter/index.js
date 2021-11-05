@@ -4,8 +4,11 @@ import PropTypes from 'prop-types';
 import Link from '../Link';
 import LoggedMenuWrapper from './styles/LoggedMenuWrapper';
 import Button from '../Button';
+import LoggedPageContext from '../../wrappers/LoggedPage/context';
 
 export default function LoggedMenuFooter({ onAdicionarClick }) {
+  const loggedPageContext = React.useContext(LoggedPageContext);
+  const { user } = loggedPageContext;
   return (
     <LoggedMenuWrapper>
       <LoggedMenuWrapper.Nav>
@@ -25,7 +28,7 @@ export default function LoggedMenuFooter({ onAdicionarClick }) {
         <li id="like"><img src="/images/heart.svg" alt="like" /></li>
         <li id="avatar">
           <Link href="/app/profile">
-            <img src="/images/avatar.png" alt="avatar" />
+            <img src={`https://i.pravatar.cc/150?u=${user.id}`} alt="avatar" />
           </Link>
         </li>
       </LoggedMenuWrapper.Nav>

@@ -9,10 +9,10 @@ import Box from '../../../foundation/layout/Box';
 import PostCard from '../../../commons/PostCard';
 import GithubLinks from '../../../commons/GithubLinks';
 
-const LoggedHomeWrapper = styled(Box)`
+const PostWrapper = styled(Box)`
 `;
 
-LoggedHomeWrapper.Logo = styled.div`
+PostWrapper.Logo = styled.div`
    background-color: ${({ theme }) => theme.colors.background.main.color};
    position: sticky;
    width: 100%;
@@ -38,7 +38,7 @@ LoggedHomeWrapper.Logo = styled.div`
   })}
 `;
 
-LoggedHomeWrapper.Body = styled.div`
+PostWrapper.Body = styled.div`
   padding: 0;
   margin: 0;
   display: flex;
@@ -62,9 +62,9 @@ LoggedHomeWrapper.Body = styled.div`
   })}
 `;
 
-export default function LoggedHomeScreen({ postProps }) {
+export default function PostScreen({ postProps }) {
   return (
-    <LoggedHomeWrapper
+    <PostWrapper
       display="flex"
       flexDirection="column"
       flex="1"
@@ -73,17 +73,17 @@ export default function LoggedHomeScreen({ postProps }) {
         md: '24px',
       }}
     >
-      <LoggedHomeWrapper.Logo>
+      <PostWrapper.Logo>
         <Logo />
-      </LoggedHomeWrapper.Logo>
-      <LoggedHomeWrapper.Body>
+      </PostWrapper.Logo>
+      <PostWrapper.Body>
         <PostCard postProps={postProps} />
         <GithubLinks />
-      </LoggedHomeWrapper.Body>
-    </LoggedHomeWrapper>
+      </PostWrapper.Body>
+    </PostWrapper>
   );
 }
 
-LoggedHomeScreen.propTypes = {
+PostScreen.propTypes = {
   postProps: PropTypes.object.isRequired,
 };

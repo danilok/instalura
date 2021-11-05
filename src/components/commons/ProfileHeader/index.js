@@ -2,6 +2,7 @@ import React from 'react';
 import styled, { css } from 'styled-components';
 import breakpointsMedia from '../../../theme/utils/breakpointsMedia';
 import Grid from '../../foundation/layout/Grid';
+import { LoggedPageContext } from '../../wrappers/LoggedPage';
 import ProfileInfo from '../ProfileInfo';
 
 const ProfileAvatar = styled.img`
@@ -17,6 +18,20 @@ const ProfileAvatar = styled.img`
 `;
 
 export default function ProfileHeader() {
+  const loggedPageContext = React.useContext(LoggedPageContext);
+  const { user, posts } = loggedPageContext;
+  const [desc, setDesc] = React.useState('');
+
+  React.useEffect(() => {
+    fetch('https://goquotes-api.herokuapp.com/api/v1/random?count=1')
+      .then((res) => res.json())
+      .then((res) => {
+        setDesc(res.quotes[0].text);
+      })
+      .catch(() => {
+        setDesc('Some random message when quote api is not working...');
+      });
+  }, []);
   return (
     <Grid.Container
       maxWidth={{
@@ -36,7 +51,7 @@ export default function ProfileHeader() {
           justifyContent="flex-end"
           paddingRight={{ xs: 0, md: '72px' }}
         >
-          <ProfileAvatar src="/images/avatar.png" alt="avatar" />
+          <ProfileAvatar src={`https://i.pravatar.cc/150?u=${user.id}`} alt="avatar" />
         </Grid.Col>
         <Grid.Col
           value={{ xs: 8, md: 6 }}
@@ -53,7 +68,7 @@ export default function ProfileHeader() {
                 value={{ xs: 4 }}
               >
                 <ProfileInfo
-                  value="234"
+                  value={posts.length}
                   title="Publicações"
                 />
               </Grid.Col>
@@ -82,8 +97,8 @@ export default function ProfileHeader() {
                 value="12"
               >
                 <ProfileInfo
-                  value="Nicolas Cage"
-                  title="A wholesome person responsible for the best movies ever."
+                  value={user.username}
+                  title={desc}
                   variantTitle="profileTitle"
                   variantValue="profileBio"
                 />
@@ -99,8 +114,8 @@ export default function ProfileHeader() {
           paddingTop={{ xs: '16px', md: '0' }}
         >
           <ProfileInfo
-            value="Nicolas Cage"
-            title="A wholesome person responsible for the best movies ever."
+            value={user.username}
+            title={desc}
           />
         </Grid.Col>
       </Grid.Row>

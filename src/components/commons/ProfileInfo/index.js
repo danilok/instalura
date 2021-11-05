@@ -29,10 +29,16 @@ export default function ProfileInfo({
 }
 
 ProfileInfo.propTypes = {
-  value: PropTypes.string.isRequired,
+  value: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.number,
+  ]).isRequired,
   title: PropTypes.string.isRequired,
   variantTitle: PropTypes.string,
-  variantValue: PropTypes.string,
+  variantValue: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.number,
+  ]),
 };
 
 ProfileInfo.defaultProps = {

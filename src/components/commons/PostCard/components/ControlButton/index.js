@@ -10,6 +10,7 @@ import Text, { TextStyleVariantsMap } from '../../../../foundation/Text';
 const ControlButtonWrapper = styled(Box)`
   display: flex;
   align-items: center;
+  width: 40px;
 `;
 
 ControlButtonWrapper.Button = styled.button`
@@ -29,6 +30,16 @@ ControlButtonWrapper.Info = styled.span`
   })}
 `;
 
+function handleValue(value) {
+  if (typeof value === 'number') {
+    return String(value);
+  }
+
+  if (!value) return '';
+
+  return value;
+}
+
 export default function ControlButton({
   onClick,
   value,
@@ -38,6 +49,7 @@ export default function ControlButton({
   playingState,
   direction,
 }) {
+  const stringValue = handleValue(value);
   return (
     <ControlButtonWrapper>
       <ControlButtonWrapper.Button
@@ -55,23 +67,22 @@ export default function ControlButton({
           />
         )}
       </ControlButtonWrapper.Button>
-      {value
-        ? (
-          <Text
-            tag="span"
-            fontWeight="bold"
-          >
-            {value}
-          </Text>
-        )
-        : ''}
+      <Text
+        tag="span"
+        fontWeight="bold"
+      >
+        {stringValue}
+      </Text>
     </ControlButtonWrapper>
   );
 }
 
 ControlButton.propTypes = {
   onClick: PropTypes.func,
-  value: PropTypes.string,
+  value: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.number,
+  ]),
   icon: PropTypes.string,
   alt: PropTypes.string,
   config: PropTypes.shape({
