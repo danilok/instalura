@@ -70,7 +70,9 @@ PostCardWrapper.PostImage = styled(Box)`
 
   img {
     width: 100%;
+    height: 100%;
     object-fit: cover;
+    max-height: 600px;
     &:hover + .hide,
     &:focus + .hide {
       display: block;
@@ -110,13 +112,15 @@ PostCardWrapper.PostImage = styled(Box)`
 PostCardWrapper.Controls = styled(Box)`
   display: flex;
   flex: 1;
-  padding: 10px 10px;
+  padding: 0 10px;
+  padding-top: 10px;
   align-items: center;
   justify-content: space-between;
 
   ${breakpointsMedia({
     sm: css`
-      padding: 10px 15px;
+      padding: 0 15px;
+      padding-top: 10px;
     `,
   })}
 
@@ -152,6 +156,7 @@ PostCardWrapper.ControlsRightSide = styled(Box)`
 PostCardWrapper.Description = styled(Box)`
   display: flex;
   flex: 1;
+  padding-top: 10px;
   padding-bottom: 24px;
   padding-left: 23px;
   padding-right: 28px;

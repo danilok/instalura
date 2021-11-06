@@ -4,17 +4,17 @@ import authService from '../auth/authService';
 
 const BASE_URL = isStagingEnv
   // Back End de DEV
-  ? 'https://instalura-api-git-master-omariosouto.vercel.app'
-  // Back End de PROD
+  // ? 'https://instalura-api-git-master-omariosouto.vercel.app'
+  ? 'https://instalura-api.vercel.app'
   : 'https://instalura-api-git-master-omariosouto.vercel.app';
-// : 'https://instalura-api.omariosouto.vercel.app';
+  // Back End de PROD
 
 const postService = () => {
-  const url = `${BASE_URL}/api/posts/`;
+  const url = `${BASE_URL}/api/posts`;
   return {
     async setLike(id) {
       const token = authService(null).getToken();
-      const likeUrl = `${url}${id}/like`;
+      const likeUrl = `${url}/${id}/like`;
       try {
         const response = await HttpClient(likeUrl, {
           method: 'POST',

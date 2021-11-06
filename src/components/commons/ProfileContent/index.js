@@ -96,7 +96,7 @@ export default function ProfileContent() {
                   : `filter-${itemAtual.filter}`;
               }
               return (
-                <li key={itemAtual._id}>
+                <li key={itemAtual._id} id={itemAtual._id}>
                   <Link href={`/app/posts/${itemAtual._id}`}>
                     <figure className={filterName}>
                       <img src={itemAtual.photoUrl} alt={itemAtual.description} />

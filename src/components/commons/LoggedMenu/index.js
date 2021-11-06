@@ -16,21 +16,21 @@ export default function LoggedMenu({ onAdicionarClick }) {
         <Logo />
       </LoggedMenuWrapper.Logo>
       <LoggedMenuWrapper.Nav>
-        <li id="search"><img src="/images/search.svg" alt="search" /></li>
-        <li id="search">
+        <li id="h-search"><img src="/images/search.svg" alt="search" /></li>
+        <li id="h-add">
           <Button
             onClick={onAdicionarClick}
           >
             <img src="/images/postIcon.svg" alt="add" />
           </Button>
         </li>
-        <li id="home">
+        <li id="h-home">
           <Link href="/app/home">
             <img src="/images/home.svg" alt="home" />
           </Link>
         </li>
-        <li id="like"><img src="/images/heart.svg" alt="like" /></li>
-        <li id="avatar">
+        <li id="h-like"><img src="/images/heart.svg" alt="like" /></li>
+        <li id="h-avatar">
           <Link href="/app/profile">
             <img src={`https://i.pravatar.cc/150?u=${user.id}`} alt="avatar" />
           </Link>

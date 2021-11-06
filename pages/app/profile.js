@@ -3,7 +3,7 @@ import React from 'react';
 import authService from '../../src/services/auth/authService';
 import userService from '../../src/services/user/userService';
 import LoggedPageHOC from '../../src/components/wrappers/LoggedPage/hoc';
-import ProfileScreen from '../../src/components/screens/ProfileScreen';
+import ProfileScreen from '../../src/components/screens/app/ProfileScreen';
 
 function ProfilePage(props) {
   return (

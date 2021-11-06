@@ -3,18 +3,15 @@ import React from 'react';
 import styled, { css } from 'styled-components';
 import PropTypes from 'prop-types';
 import get from 'lodash/get';
-// import * as yup from 'yup';
 import Button from '../../commons/Button';
 import TextField from '../../forms/TextField';
-// import useForm from '../../../infra/hooks/form/useForm';
-// import loginService from '../../../services/login/loginService';
 import Grid from '../../foundation/layout/Grid';
 import Box from '../../foundation/layout/Box';
 import Text from '../../foundation/Text';
 import breakpointsMedia from '../../../theme/utils/breakpointsMedia';
 import FiltersSlider from '../../commons/FiltersSlider';
-import authService from '../../../services/auth/authService';
 import LoggedPageContext from '../../wrappers/LoggedPage/context';
+import postService from '../../../services/post/postService';
 
 const formStates = {
   DEFAULT: 'DEFAULT',
@@ -84,6 +81,7 @@ const CloseButtonWrapper = styled.div`
 function CloseImageButton({ onClose }) {
   return (
     <CloseButtonWrapper
+      id="close-form-imagem"
       onClick={() => {
         onClose();
       }}
@@ -102,8 +100,6 @@ function FormContent() {
   const [image, setImage] = React.useState({
     url: '',
     filter: '',
-    // usuario: 'danilo@email.com',
-    // nome: 'danilo',
   });
   const [secondStep, setSecondStep] = React.useState(false);
   const loggedPageContext = React.useContext(LoggedPageContext);
@@ -134,12 +130,12 @@ function FormContent() {
     }));
   });
 
-  /* const isFormValid = image.url.length === 0 || image.filter.length === 0; */
   const isFormValid = image.url.length === 0;
   const isFormUrlValid = image.url.length === 0;
 
   return (
     <Form
+      id="formImagem"
       onSubmit={async (event) => {
         event.preventDefault();
 
@@ -153,27 +149,8 @@ function FormContent() {
         try {
           setMessage(messagesMap.loading);
           setSubmissionStatus(formStates.LOADING);
-          const auth = authService();
-          const token = auth.getToken();
-          const respostaDoServidor = await fetch('https://instalura-api.vercel.app/api/posts', {
-            method: 'POST',
-            headers: {
-              'Content-Type': 'application/json',
-              Authorization: `Bearer ${token}`,
-            },
-            body: JSON.stringify(postDTO),
-          });
-
-          if (!respostaDoServidor.ok) {
-            const respostaConvertidaDoErro = await respostaDoServidor.json();
-            const mensagem = messagesMap.error[respostaConvertidaDoErro.error.username.kind];
-            if (mensagem) {
-              throw new Error(mensagem);
-            }
-            throw new Error(messagesMap.error.generic);
-          }
-
-          const respostaConvertidaEmObjeto = await respostaDoServidor.json();
+          const post = postService();
+          const respostaConvertidaEmObjeto = await post.createPost(postDTO);
           setTimeout(() => {
             setMessage(messagesMap.success);
             setSubmissionStatus(formStates.DONE);

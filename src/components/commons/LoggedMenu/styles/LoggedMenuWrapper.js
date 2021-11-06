@@ -73,15 +73,15 @@ LoggedMenuWrapper.Nav = styled.nav`
     border: 0;
   }
 
-  #home {
+  #h-home {
     order: 3;
   }
 
-  #search {
+  #h-search {
     order: 1;
   }
 
-  #add {
+  #h-add {
     order: 2;
     img {
       width: 40px;
@@ -89,11 +89,11 @@ LoggedMenuWrapper.Nav = styled.nav`
     }
   }
 
-  #like {
+  #h-like {
     order: 4;
   }
 
-  #avatar {
+  #h-avatar {
     order: 5;
     img {
       border-radius: 50%;
