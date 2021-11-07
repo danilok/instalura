@@ -37,6 +37,7 @@ export async function getServerSideProps(ctx) {
             ...session,
           },
           post,
+          posts: [],
         },
       };
     } catch (error) {

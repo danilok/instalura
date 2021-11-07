@@ -157,9 +157,17 @@ PostCardWrapper.Description = styled(Box)`
   display: flex;
   flex: 1;
   padding-top: 10px;
-  padding-bottom: 24px;
+  padding-bottom: 10px;
   padding-left: 23px;
   padding-right: 28px;
+  ${breakpointsMedia({
+    md: css`
+      padding-bottom: 15px;
+    `,
+    lg: css`
+      padding-bottom: 20px;
+    `,
+  })}
 `;
 
 export default function PostCard({
@@ -178,6 +186,7 @@ export default function PostCard({
   const [direction, setDirection] = React.useState(like === true ? '1' : '-1');
   const [displayModal, setDisplayModal] = React.useState(false);
   const [likesValues, setLikesValues] = React.useState(post.likes.length);
+  const [disabled, setDisabled] = React.useState(false);
   const postSrv = postService();
 
   const hasFilter = !!post.filter;
@@ -189,6 +198,7 @@ export default function PostCard({
   }
 
   const onLikeClick = React.useCallback(() => {
+    setDisabled(true);
     postSrv.setLike(post._id)
       .then(() => {
         const animationDirection = liked === true ? '-1' : '1';
@@ -198,10 +208,12 @@ export default function PostCard({
           const newLikesValues = (liked === true) ? value - 1 : value + 1;
           return newLikesValues;
         });
+        setDisabled(false);
       })
       .catch(() => {
         // eslint-disable-next-line no-console
         console.log('Deu ruim no like');
+        setDisabled(false);
       });
   }, [liked]);
 
@@ -234,6 +246,7 @@ export default function PostCard({
               type="button"
               className="hide"
               onClick={onLikeClick}
+              disabled={disabled}
             >
               <Lottie
                 width="64px"

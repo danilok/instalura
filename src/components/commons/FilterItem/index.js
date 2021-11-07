@@ -3,7 +3,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import Text from '../../foundation/Text';
 
-export default function FilterItem({ filter, handleFilter }) {
+export default function FilterItem({ imageUrl, filter, handleFilter }) {
   return (
     <>
       <button
@@ -12,7 +12,7 @@ export default function FilterItem({ filter, handleFilter }) {
       >
         <figure className={`filter-${filter}`}>
           <img
-            src="https://picturepan2.github.io/instagram.css/assets/img/instagram.jpg"
+            src={imageUrl}
             width="88px"
             height="88px"
             alt={filter}
@@ -31,6 +31,7 @@ export default function FilterItem({ filter, handleFilter }) {
 }
 
 FilterItem.propTypes = {
+  imageUrl: PropTypes.string.isRequired,
   filter: PropTypes.string.isRequired,
   handleFilter: PropTypes.func.isRequired,
 };

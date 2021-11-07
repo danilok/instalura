@@ -42,6 +42,7 @@ export async function getServerSideProps(ctx) {
           photoUrl: `https://i.pravatar.cc/375?u=${session.id}`,
           likes: [],
         },
+        posts: [],
       },
     };
   }

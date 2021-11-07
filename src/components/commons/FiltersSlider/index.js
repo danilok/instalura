@@ -74,7 +74,7 @@ Filters.List = styled.ol`
   }
 `;
 
-export default function FiltersSlider({ handleFilter }) {
+export default function FiltersSlider({ imageUrl, handleFilter }) {
   return (
     <Filters>
       <Filters.List>
@@ -82,6 +82,7 @@ export default function FiltersSlider({ handleFilter }) {
           <li key={filter} data-filter={filter}>
             <FilterItem
               filter={filter}
+              imageUrl={imageUrl}
               handleFilter={handleFilter}
             />
           </li>
@@ -93,4 +94,5 @@ export default function FiltersSlider({ handleFilter }) {
 
 FiltersSlider.propTypes = {
   handleFilter: PropTypes.func.isRequired,
+  imageUrl: PropTypes.string.isRequired,
 };

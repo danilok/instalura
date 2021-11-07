@@ -84,4 +84,35 @@ LoggedMenuWrapper.Nav = styled.nav`
   }
 `;
 
+LoggedMenuWrapper.Avatar = styled.li`
+  button {
+    padding: 5px;
+  }
+
+  img {
+    border-radius: 50%;
+    border: 2px solid #D7385E;
+    border: 0;
+  }
+`;
+
+LoggedMenuWrapper.Dropdown = styled.div`
+  position: absolute;
+  background-color: #fff;
+  min-width: 160px;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  border-radius: 8px;
+  z-index: 1;
+  float: right;
+  bottom: 50px;
+  right: 10px;
+  height: 96px;
+  a {
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+  }
+`;
+
 export default LoggedMenuWrapper;

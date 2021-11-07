@@ -78,6 +78,12 @@ const CloseButtonWrapper = styled.div`
   cursor: pointer;
 `;
 
+ImageForm.Buttons = styled.div`
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
+`;
+
 function CloseImageButton({ onClose }) {
   return (
     <CloseButtonWrapper
@@ -128,6 +134,14 @@ function FormContent() {
       ...currentValues,
       filter: newFilter,
     }));
+  });
+
+  const handleDiscard = (() => {
+    setImageSrc('/images/image.svg');
+    setSelectedFilter('normal');
+    setImage({ url: '', filter: '' });
+    setSecondStep(false);
+    setSubmissionStatus(formStates.DEFAULT);
   });
 
   const isFormValid = image.url.length === 0;
@@ -208,15 +222,28 @@ function FormContent() {
         )}
         {secondStep && (
           <div>
-            <FiltersSlider handleFilter={handleFilter} />
-            <Button
-              variant="primary.main"
-              type="submit"
-              disabled={isFormValid}
-              fullWidth
-            >
-              Postar
-            </Button>
+            <FiltersSlider
+              imageUrl={image.url}
+              handleFilter={handleFilter}
+            />
+            <ImageForm.Buttons>
+              <Button
+                variant="primary.main"
+                type="submit"
+                disabled={isFormValid}
+                fullWidth
+              >
+                Postar
+              </Button>
+              <Button
+                variant="primary.main"
+                type="button"
+                disabled={isFormValid}
+                onClick={handleDiscard}
+              >
+                🗑️
+              </Button>
+            </ImageForm.Buttons>
           </div>
         )}
         {isFormSubmitted && submissionStatus === formStates.LOADING && (

@@ -9,7 +9,11 @@ export default function ProfileScreen() {
       display="flex"
       flexDirection="column"
       flex="1"
-      marginTop="32px"
+      paddingTop={{
+        xs: '24px',
+        md: '32px',
+      }}
+      overflow="auto"
     >
       <ProfileContent />
     </Box>

@@ -23,9 +23,6 @@ const LoggedMenuWrapper = styled.div`
       bottom: unset;
       border-radius: 0;
       height: 96px;
-      div {
-        height: 64px;
-      }
     `,
   })}
 `;
@@ -38,6 +35,12 @@ LoggedMenuWrapper.Logo = styled.div`
   align-items: center;
   width: 40%;
   flex-grow: 1;
+
+  ${breakpointsMedia({
+    md: css`
+      height: 64px;
+    `,
+  })}
 `;
 
 LoggedMenuWrapper.Nav = styled.nav`
@@ -95,11 +98,44 @@ LoggedMenuWrapper.Nav = styled.nav`
 
   #h-avatar {
     order: 5;
-    img {
-      border-radius: 50%;
-      border: 2px solid #D7385E;
-      border: 0;
-    }
+  }
+`;
+
+LoggedMenuWrapper.Avatar = styled.li`
+  img {
+    border-radius: 50%;
+    border: 2px solid #D7385E;
+    border: 0;
+  }
+`;
+
+LoggedMenuWrapper.Dropdown = styled.div`
+  display: none;
+  position: absolute;
+  background-color: #f1f1f1;
+  min-width: 160px;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 1;
+  float: right;
+  top: 65px;
+  right: 9%;
+  height: 96px;
+  border-radius: 8px;
+  a {
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+  }
+
+  ${LoggedMenuWrapper.Avatar}:hover + & {
+    background-color: #fff;
+    display: block;
+  }
+
+  &:hover {
+    background-color: #fff;
+    display: block;
   }
 `;
 

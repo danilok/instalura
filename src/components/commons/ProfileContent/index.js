@@ -36,6 +36,12 @@ export const ProfileRelationsBoxWrapper = styled(Box)`
     margin: 0;
     padding: 16px;
     align-content: start;
+    ${breakpointsMedia({
+    md: css`
+      height: 250px;
+      grid-gap: 16px;
+    `,
+  })}
   }
   figure {
     width: 100%;
@@ -55,6 +61,7 @@ export const ProfileRelationsBoxWrapper = styled(Box)`
     height: 112px;
     position: relative;
     overflow: hidden;
+    width: 100%;
     ${breakpointsMedia({
     md: css`
         height: 250px;
@@ -99,7 +106,7 @@ export default function ProfileContent() {
                 <li key={itemAtual._id} id={itemAtual._id}>
                   <Link href={`/app/posts/${itemAtual._id}`}>
                     <figure className={filterName}>
-                      <img src={itemAtual.photoUrl} alt={itemAtual.description} />
+                      <img src={itemAtual.photoUrl} loading="lazy" alt={itemAtual.description} />
                     </figure>
                   </Link>
                 </li>

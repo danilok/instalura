@@ -6,10 +6,17 @@ import Link from '../Link';
 import LoggedMenuWrapper from './styles/LoggedMenuWrapper';
 import Button from '../Button';
 import LoggedPageContext from '../../wrappers/LoggedPage/context';
+import Text from '../../foundation/Text';
+import loginService from '../../../services/login/loginService';
 
 export default function LoggedMenu({ onAdicionarClick }) {
   const loggedPageContext = React.useContext(LoggedPageContext);
   const { user } = loggedPageContext;
+
+  const onLogout = React.useCallback(() => {
+    loginService.logout();
+  });
+
   return (
     <LoggedMenuWrapper>
       <LoggedMenuWrapper.Logo>
@@ -30,11 +37,28 @@ export default function LoggedMenu({ onAdicionarClick }) {
           </Link>
         </li>
         <li id="h-like"><img src="/images/heart.svg" alt="like" /></li>
-        <li id="h-avatar">
-          <Link href="/app/profile">
+        <LoggedMenuWrapper.Avatar id="h-avatar">
+          <Button>
             <img src={`https://i.pravatar.cc/150?u=${user.id}`} alt="avatar" />
+          </Button>
+        </LoggedMenuWrapper.Avatar>
+        <LoggedMenuWrapper.Dropdown>
+          <Link href="/app/profile">
+            <Text
+              tag="span"
+            >
+              Perfil
+            </Text>
           </Link>
-        </li>
+          <Link href="/">
+            <Text
+              tag="span"
+              onClick={onLogout}
+            >
+              Logout
+            </Text>
+          </Link>
+        </LoggedMenuWrapper.Dropdown>
       </LoggedMenuWrapper.Nav>
     </LoggedMenuWrapper>
   );
