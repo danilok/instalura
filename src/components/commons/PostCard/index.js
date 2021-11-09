@@ -55,52 +55,45 @@ PostCardWrapper.PostImage = styled(Box)`
   // https://www.w3schools.com/howto/tryit.asp?filename=tryhow_css_button_on_image
   display: flex;
   flex: 1;
+  position: relative;
+`;
 
-  figure {
-    width: 100%;
-    margin: 0;
-    padding: 0;
-
-    position: relative;
-    &:hover + .hide,
-    &:focus + .hide {
-      display: block;
-    }
-  }
+PostCardWrapper.ImageContainer = styled.figure`
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  position: relative;
+  max-height: 600px;
 
   img {
     width: 100%;
     height: 100%;
     object-fit: cover;
     max-height: 600px;
-    &:hover + .hide,
-    &:focus + .hide {
-      display: block;
-    }
+  }
+`;
+
+PostCardWrapper.LikeButton = styled.button`
+  cursor: pointer;
+
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%);
+  background-color: transparent;
+  border: none;
+  text-align: center;
+  width: 100%;
+  height: 100%;
+  display: none;
+
+  &:hover {
+    display: block;
   }
 
-  .hide {
-    display: none;
-  }
-
-  button {
-    cursor: pointer;
-
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    -ms-transform: translate(-50%, -50%);
-    background-color: transparent;
-    border: none;
-    text-align: center;
-    width: 100%;
-    height: 100%;
-    display: none;
-
-    &:hover {
-      display: block;
-    }
+  ${PostCardWrapper.ImageContainer}:hover + & {
+    display: block;
   }
 
   .container {
@@ -239,26 +232,26 @@ export default function PostCard({
         </button>
       </PostCardWrapper.Header>
       <PostCardWrapper.PostImage>
-        <figure className={filterName}>
+        <PostCardWrapper.ImageContainer className={filterName}>
           <img src={post.photoUrl} alt="img" />
-          {!home && (
-            <button
-              type="button"
-              className="hide"
-              onClick={onLikeClick}
-              disabled={disabled}
-            >
-              <Lottie
-                width="64px"
-                height="64px"
-                // playingState={playingState}
-                direction={direction}
-                className="lottie-container basic container"
-                config={{ animationData: likeAnimation, loop: false, autoplay: true }}
-              />
-            </button>
-          )}
-        </figure>
+        </PostCardWrapper.ImageContainer>
+        {!home && (
+          <PostCardWrapper.LikeButton
+            type="button"
+            className="hide"
+            onClick={onLikeClick}
+            disabled={disabled}
+          >
+            <Lottie
+              width="64px"
+              height="64px"
+              // playingState={playingState}
+              direction={direction}
+              className="lottie-container basic container"
+              config={{ animationData: likeAnimation, loop: false, autoplay: true }}
+            />
+          </PostCardWrapper.LikeButton>
+        )}
       </PostCardWrapper.PostImage>
       {!home && (
         <PostCardWrapper.Controls>
