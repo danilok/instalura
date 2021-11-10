@@ -1,3 +1,4 @@
+/* eslint-disable @next/next/no-css-tags */
 import React from 'react';
 import Head from 'next/head';
 
@@ -23,6 +24,7 @@ export default function AppHead() {
       />
       <link rel="manifest" href="/site.webmanifest" />
       <meta name="theme-color" content="#ffffff" />
+      <link rel="stylesheet" href="/instagram.min.css" />
     </Head>
   );
 }
