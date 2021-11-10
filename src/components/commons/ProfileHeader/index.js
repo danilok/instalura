@@ -76,7 +76,7 @@ export default function ProfileHeader() {
                 value={{ xs: 4 }}
               >
                 <ProfileInfo
-                  value="22k"
+                  value={user.following}
                   title="Seguindo"
                 />
               </Grid.Col>
@@ -84,7 +84,7 @@ export default function ProfileHeader() {
                 value={{ xs: 4 }}
               >
                 <ProfileInfo
-                  value="134k"
+                  value={user.followers}
                   title="Seguidores"
                 />
               </Grid.Col>

@@ -278,7 +278,7 @@ export default function PostCard({
             <ControlButton
               onClick={onButtonClick}
               icon="/images/bookmark.svg"
-              alt="Share"
+              alt="bookmark"
             />
           </PostCardWrapper.ControlsRightSide>
         </PostCardWrapper.Controls>

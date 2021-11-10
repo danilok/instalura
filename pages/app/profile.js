@@ -27,6 +27,15 @@ export async function getServerSideProps(ctx) {
   const user = userService(ctx);
   const hasActiveSession = await auth.hasActiveSession();
 
+  const getRandomIntInclusive = (begin, end) => {
+    const min = Math.ceil(begin);
+    const max = Math.floor(end);
+    return Math.floor(Math.random() * (max - min + 1)) + min;
+  };
+
+  const followers = getRandomIntInclusive(0, 50000);
+  const following = getRandomIntInclusive(0, 50000);
+
   if (hasActiveSession) {
     const session = await auth.getSession();
     const profilePage = await user.getProfilePage();
@@ -39,6 +48,8 @@ export async function getServerSideProps(ctx) {
         user: {
           ...session,
           ...profilePage.user,
+          followers,
+          following,
         },
         posts,
       },

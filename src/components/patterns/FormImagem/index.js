@@ -28,6 +28,14 @@ const messagesMap = {
   },
 };
 
+const GridContainer = styled(Grid.Container)`
+  ${breakpointsMedia({
+    sm: css`
+      transform: translateX(-35%);
+    `,
+  })}
+`;
+
 const Form = styled.form`
   padding-top: 40px;
 `;
@@ -303,7 +311,7 @@ export default function FormImagem({ propsDoModal }) {
   // });
 
   return (
-    <Grid.Container
+    <GridContainer
       display="flex"
       flex={1}
       paddingRight={{
@@ -364,7 +372,7 @@ export default function FormImagem({ propsDoModal }) {
           </Box>
         </Grid.Col>
       </Grid.Row>
-    </Grid.Container>
+    </GridContainer>
   );
 }
 
