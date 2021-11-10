@@ -12,11 +12,15 @@ const BASE_URL = isStagingEnv
 const postService = () => {
   const url = `${BASE_URL}/api/posts`;
   return {
-    async setLike(id) {
-      const token = authService(null).getToken();
+    async setLike(
+      id,
+      authServiceModule = authService,
+      HttpClienteModule = HttpClient,
+    ) {
+      const token = authServiceModule(null).getToken();
       const likeUrl = `${url}/${id}/like`;
       try {
-        const response = await HttpClient(likeUrl, {
+        const response = await HttpClienteModule(likeUrl, {
           method: 'POST',
           headers: {
             Authorization: `Bearer ${token}`,
@@ -27,10 +31,14 @@ const postService = () => {
         throw new Error(`Erro ao dar like/dislike no post ${id}}`);
       }
     },
-    async createPost({ photoUrl, description, filter }) {
-      const token = authService(null).getToken();
+    async createPost(
+      { photoUrl, description, filter },
+      authServiceModule = authService,
+      HttpClienteModule = HttpClient,
+    ) {
+      const token = authServiceModule(null).getToken();
       try {
-        const response = await HttpClient(url, {
+        const response = await HttpClienteModule(url, {
           method: 'POST',
           body: {
             photoUrl,
