@@ -125,6 +125,18 @@ This project can be tested online, click on badge below:
 
 <br>
 
+## Integration test: create post
+
+<img src="./public/integration_test.gif" width="720" alt="Instalura">
+
+<br>
+
+## Log in, create post, visit post, like and unlike, visit profile, visit home, logout
+
+<img src="./public/finalcut.gif" width="375" alt="Instalura">
+
+<br>
+
 # 👨‍🏫/👩‍🏫 Instructors
 - Mario Souto (@omariosouto)
 - Juliana Amoasei (@JulianaAmoasei)
