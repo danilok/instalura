@@ -3,6 +3,7 @@ import React from 'react';
 import LoggedHomeScreen from '../../src/components/screens/app/LoggedHomeScreen';
 import LoggedPageHOC from '../../src/components/wrappers/LoggedPage/hoc';
 import authService from '../../src/services/auth/authService';
+import userService from '../../src/services/user/userService';
 
 function HomePage(props) {
   return (
@@ -23,11 +24,16 @@ export default LoggedPageHOC(HomePage, {
 
 export async function getServerSideProps(ctx) {
   const auth = authService(ctx);
+  const user = userService(ctx);
   const hasActiveSession = await auth.hasActiveSession();
 
   if (hasActiveSession) {
     const session = await auth.getSession();
-    const home = true;
+    const home = false;
+    const profilePage = await user.getProfilePage();
+    const posts = profilePage.posts && profilePage.posts.length > 0
+      ? profilePage.posts
+      : [];
     return {
       props: {
         user: {
@@ -42,7 +48,7 @@ export async function getServerSideProps(ctx) {
           photoUrl: `https://i.pravatar.cc/375?u=${session.id}`,
           likes: [],
         },
-        posts: [],
+        posts,
       },
     };
   }

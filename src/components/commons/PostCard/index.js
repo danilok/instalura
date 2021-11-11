@@ -233,7 +233,7 @@ export default function PostCard({
       </PostCardWrapper.Header>
       <PostCardWrapper.PostImage>
         <PostCardWrapper.ImageContainer className={filterName}>
-          <img src={post.photoUrl} alt="img" />
+          <img src={post.photoUrl} alt="img" loading="lazy" />
         </PostCardWrapper.ImageContainer>
         {!home && (
           <PostCardWrapper.LikeButton

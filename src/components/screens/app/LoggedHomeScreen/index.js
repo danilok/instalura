@@ -6,8 +6,8 @@ import { PropTypes } from 'prop-types';
 import breakpointsMedia from '../../../../theme/utils/breakpointsMedia';
 import Logo from '../../../../theme/Logo';
 import Box from '../../../foundation/layout/Box';
-import PostCard from '../../../commons/PostCard';
 import GithubLinks from '../../../commons/GithubLinks';
+import Feed from '../../../commons/Feed';
 
 const LoggedHomeWrapper = styled(Box)`
 `;
@@ -77,7 +77,7 @@ export default function LoggedHomeScreen({ postProps }) {
         <Logo />
       </LoggedHomeWrapper.Logo>
       <LoggedHomeWrapper.Body>
-        <PostCard postProps={postProps} />
+        <Feed postProps={postProps} />
         <GithubLinks />
       </LoggedHomeWrapper.Body>
     </LoggedHomeWrapper>
