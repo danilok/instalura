@@ -10,6 +10,16 @@ Project of Advanced Front-End Bootcamp from Alura using the fabulous JAMStack.
 
 <br>
 
+# 📋 Run online
+
+This project can be tested online, click on badge below:
+
+[![Vercel Badge](https://img.shields.io/badge/Vercel-000000?style=for-the-badge&logo=vercel&logoColor=white&link=https://portfolio-danilok.vercel.app)](https://instalura-danilok.vercel.app)
+
+After user register, you can log in using the default password "senhasegura" since it's a demo project.
+
+<br>
+
 # 👩‍💻 Languages
 ![html5](https://img.shields.io/badge/HTML5-E34F26?style=for-the-badge&logo=html5&logoColor=white)
 ![css3](https://img.shields.io/badge/CSS3-1572B6?style=for-the-badge&logo=css3&logoColor=white)
@@ -95,14 +105,6 @@ These variables must be configured on:
 - `.env.local` file for local deployment
 - Github Secrets for Github Actions CI
 - Vercel Environment Variables for build/deploy on Vercel.
-
-<br>
-
-# 📋 Run online
-
-This project can be tested online, click on badge below:
-
-[![Vercel Badge](https://img.shields.io/badge/Vercel-000000?style=for-the-badge&logo=vercel&logoColor=white&link=https://portfolio-danilok.vercel.app)](https://instalura-danilok.vercel.app)
 
 <br>
 
