@@ -286,8 +286,11 @@ export default function PostCard({
         <Text
           tag="span"
           variant="paragraph1"
+          data-content={post.description}
         >
-          {post.description}
+          {post.description.length > 120
+            ? `${post.description.substr(0, 120)}...`
+            : post.description}
         </Text>
       </PostCardWrapper.Description>
       {displayModal && (
