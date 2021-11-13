@@ -165,7 +165,8 @@ function FormContent() {
         const postDTO = {
           photoUrl: image.url,
           description: 'Imagem teste',
-          filter: image.filter, // Remember to add options as named here: https://picturepan2.github.io/instagram.css/
+          // Remember to add options as named here: https://picturepan2.github.io/instagram.css/
+          filter: image.filter ? image.filter : 'filter-none',
         };
 
         try {
