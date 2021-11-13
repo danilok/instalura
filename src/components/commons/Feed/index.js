@@ -5,6 +5,8 @@ import styled from 'styled-components';
 import { PropTypes } from 'prop-types';
 import Box from '../../foundation/layout/Box';
 import PostCard from '../PostCard';
+import LoggedPageContext from '../../wrappers/LoggedPage/context';
+import Text from '../../foundation/Text';
 
 const FeedWrapper = styled(Box)`
   ul {
@@ -19,14 +21,30 @@ const FeedWrapper = styled(Box)`
 `;
 
 export default function Feed({ postProps }) {
+  const loggedPageContext = React.useContext(LoggedPageContext);
   return (
     <FeedWrapper
       display="flex"
       flexDirection="column"
     >
-      {postProps.posts.length > 0 && (
+      {loggedPageContext.posts.length === 0 && (
+        <Box
+          flex={1}
+          display="flex"
+          justifyContent="center"
+          alignItems="center"
+        >
+          <Text
+            tag="span"
+            variant="subTitle"
+          >
+            Não há dados... Faça um post!
+          </Text>
+        </Box>
+      )}
+      {loggedPageContext.posts.length > 0 && (
         <ul>
-          {postProps.posts.map((itemAtual) => {
+          {loggedPageContext.posts.map((itemAtual) => {
             const post = {
               ...postProps,
               post: itemAtual,
