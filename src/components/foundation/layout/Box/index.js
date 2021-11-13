@@ -21,6 +21,11 @@ const Box = styled.div`
   ${propToStyle('marginTop')}
   ${propToStyle('marginRight')}
   ${propToStyle('marginBottom')}
+  ${propToStyle('paddingLeft')}
+  ${propToStyle('paddingTop')}
+  ${propToStyle('paddingRight')}
+  ${propToStyle('paddingBottom')}
+  ${propToStyle('overflow')}
   ${({ theme, borderRadiusTheme }) => borderRadiusTheme && `border-radius: ${theme.borderRadius}`};
 `;
 

@@ -35,6 +35,14 @@ const colors = {
       color: '#88989E',
       contrastText: '#fff',
     },
+    dark: {
+      color: '#FFFFFF',
+      contrastText: '#000',
+    },
+    darkMain: {
+      color: '#D4D4D4',
+      contrastText: '#fff',
+    },
   },
   // Feedback colors
   error: {

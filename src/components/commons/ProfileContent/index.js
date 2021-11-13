@@ -1,3 +1,4 @@
+/* eslint-disable no-underscore-dangle */
 /* eslint-disable @next/next/no-img-element */
 import React from 'react';
 import styled, { css } from 'styled-components';
@@ -6,11 +7,12 @@ import ProfileHeader from '../ProfileHeader';
 import breakpointsMedia from '../../../theme/utils/breakpointsMedia';
 import { LoggedPageContext } from '../../wrappers/LoggedPage';
 import Text from '../../foundation/Text';
+import Link from '../Link';
 
 const ProfileContentWrapper = styled(Box)`
   display: flex;
   flex: 1;
-  flex-direction: column
+  flex-direction: column;
 `;
 
 export const ProfileRelationsBoxWrapper = styled(Box)`
@@ -33,6 +35,19 @@ export const ProfileRelationsBoxWrapper = styled(Box)`
     list-style: none;
     margin: 0;
     padding: 16px;
+    align-content: start;
+    ${breakpointsMedia({
+    md: css`
+      height: 250px;
+      grid-gap: 16px;
+    `,
+  })}
+  }
+  figure {
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    padding: 0;
   }
   img {
     object-fit: cover;
@@ -46,6 +61,7 @@ export const ProfileRelationsBoxWrapper = styled(Box)`
     height: 112px;
     position: relative;
     overflow: hidden;
+    width: 100%;
     ${breakpointsMedia({
     md: css`
         height: 250px;
@@ -56,7 +72,6 @@ export const ProfileRelationsBoxWrapper = styled(Box)`
 
 export default function ProfileContent() {
   const loggedPageContext = React.useContext(LoggedPageContext);
-
   return (
     <ProfileContentWrapper>
       <ProfileHeader />
@@ -79,14 +94,24 @@ export default function ProfileContent() {
         )}
         {loggedPageContext.posts.length > 0 && (
           <ul>
-            {loggedPageContext.posts.map((itemAtual) => (
-              // eslint-disable-next-line no-underscore-dangle
-              <li key={itemAtual._id}>
-                <a href={itemAtual.photoUrl}>
-                  <img src={itemAtual.photoUrl} alt={itemAtual.description} />
-                </a>
-              </li>
-            ))}
+            {loggedPageContext.posts.map((itemAtual) => {
+              const hasFilter = !!itemAtual.filter;
+              let filterName = 'filter-none';
+              if (hasFilter) {
+                filterName = itemAtual.filter.startsWith('filter-')
+                  ? itemAtual.filter
+                  : `filter-${itemAtual.filter}`;
+              }
+              return (
+                <li key={itemAtual._id} id={itemAtual._id}>
+                  <Link href={`/app/posts/${itemAtual._id}`}>
+                    <figure className={filterName}>
+                      <img src={itemAtual.photoUrl} loading="lazy" alt={itemAtual.description} />
+                    </figure>
+                  </Link>
+                </li>
+              );
+            })}
           </ul>
         )}
       </ProfileRelationsBoxWrapper>

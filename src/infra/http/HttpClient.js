@@ -9,7 +9,9 @@ export default async function HttpClient(url, { headers, body, ...options }) {
   })
     .then((respostaDoServidor) => {
       if (respostaDoServidor.ok) {
-        return respostaDoServidor.json();
+        return respostaDoServidor.status === 204
+          ? {}
+          : respostaDoServidor.json();
       }
 
       throw new Error('Erro ao autenticar');

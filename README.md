@@ -10,6 +10,16 @@ Project of Advanced Front-End Bootcamp from Alura using the fabulous JAMStack.
 
 <br>
 
+# 📋 Run online
+
+This project can be tested online, click on badge below:
+
+[![Vercel Badge](https://img.shields.io/badge/Vercel-000000?style=for-the-badge&logo=vercel&logoColor=white&link=https://portfolio-danilok.vercel.app)](https://instalura-danilok.vercel.app)
+
+After user register, you can log in using the default password "senhasegura" since it's a demo project.
+
+<br>
+
 # 👩‍💻 Languages
 ![html5](https://img.shields.io/badge/HTML5-E34F26?style=for-the-badge&logo=html5&logoColor=white)
 ![css3](https://img.shields.io/badge/CSS3-1572B6?style=for-the-badge&logo=css3&logoColor=white)
@@ -98,14 +108,6 @@ These variables must be configured on:
 
 <br>
 
-# 📋 Run online
-
-This project can be tested online, click on badge below:
-
-[![Vercel Badge](https://img.shields.io/badge/Vercel-000000?style=for-the-badge&logo=vercel&logoColor=white&link=https://portfolio-danilok.vercel.app)](https://instalura-danilok.vercel.app)
-
-<br>
-
  # 🚦 Tests
 - Unit tests with [Jest](https://jestjs.io/pt-BR/).
 - React Component tests with [React Testing Library](https://testing-library.com).
@@ -122,6 +124,18 @@ This project can be tested online, click on badge below:
 ## Run integration tests
 1. Headless: `yarn test:integration`
 2. On cypress test suite: `yarn test:integration:open`
+
+<br>
+
+## Integration test: create post
+
+<img src="./public/integration_test.gif" width="720" alt="Instalura">
+
+<br>
+
+## Log in, create post, visit post, like and unlike, visit profile, visit home, logout
+
+<img src="./public/finalcut.gif" width="375" alt="Instalura">
 
 <br>
 
