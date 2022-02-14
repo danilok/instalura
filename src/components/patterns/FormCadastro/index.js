@@ -1,3 +1,4 @@
+/* eslint-disable react/jsx-no-bind */
 import React from 'react';
 import PropTypes from 'prop-types';
 import successAnimation from '../animations/success.json';
@@ -34,17 +35,15 @@ function FormContent() {
   const [userInfo, setUserInfo] = React.useState({
     usuario: '',
     nome: '',
-    // usuario: 'danilo@email.com',
-    // nome: 'danilo',
   });
 
-  const handleChange = React.useCallback((event) => {
+  function handleChange(event) {
     const fieldName = event.target.getAttribute('name');
     setUserInfo({
       ...userInfo,
       [fieldName]: event.target.value,
     });
-  }, [setUserInfo]);
+  }
 
   const isFormValid = userInfo.nome.length === 0 || userInfo.usuario.length === 0;
 
