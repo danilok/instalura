@@ -6,6 +6,8 @@ import SEO from '../../commons/SEO';
 import LoggedPageContext from './context';
 import LoggedMenu from '../../commons/LoggedMenu';
 import LoggedMenuFooter from '../../commons/LoggedMenuFooter';
+import ImageModal from '../../commons/ImageModal';
+import FormImagem from '../../patterns/FormImagem';
 
 export { LoggedPageContext };
 
@@ -17,6 +19,7 @@ export default function LoggedPageWrapper({
   profileProps,
 }) {
   const [isModalOpen, setModalState] = React.useState(false);
+  const [posts, setPosts] = React.useState(profileProps.posts);
 
   return (
     <LoggedPageContext.Provider
@@ -24,7 +27,14 @@ export default function LoggedPageWrapper({
         toggleModalImagem: () => {
           setModalState(!isModalOpen);
         },
-        posts: profileProps.posts,
+        updatePosts: (post) => {
+          setPosts((currentValues) => ([
+            post,
+            ...currentValues,
+          ]));
+        },
+        posts,
+        user: profileProps.user,
       }}
     >
       <SEO
@@ -38,13 +48,28 @@ export default function LoggedPageWrapper({
         {...pageBoxProps}
       >
         {menuProps.display && (
-          <LoggedMenu />
+          <LoggedMenu
+            onAdicionarClick={() => setModalState(true)}
+          />
         )}
+
+        <ImageModal
+          isOpen={isModalOpen}
+          onClose={() => {
+            setModalState(false);
+          }}
+        >
+          {(propsDoModal) => (
+            <FormImagem propsDoModal={propsDoModal} />
+          )}
+        </ImageModal>
 
         {children}
 
         {menuProps.display && (
-          <LoggedMenuFooter />
+          <LoggedMenuFooter
+            onAdicionarClick={() => setModalState(true)}
+          />
         )}
 
       </Box>

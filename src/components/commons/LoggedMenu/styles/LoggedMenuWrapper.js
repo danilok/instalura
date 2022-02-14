@@ -9,7 +9,7 @@ const LoggedMenuWrapper = styled.div`
   top: 0;
   display: flex;
   list-style: none;
-  z-index: 100;
+  z-index: 50;
 
   ${breakpointsMedia({
     xs: css`
@@ -23,9 +23,6 @@ const LoggedMenuWrapper = styled.div`
       bottom: unset;
       border-radius: 0;
       height: 96px;
-      div {
-        height: 64px;
-      }
     `,
   })}
 `;
@@ -38,6 +35,12 @@ LoggedMenuWrapper.Logo = styled.div`
   align-items: center;
   width: 40%;
   flex-grow: 1;
+
+  ${breakpointsMedia({
+    md: css`
+      height: 64px;
+    `,
+  })}
 `;
 
 LoggedMenuWrapper.Nav = styled.nav`
@@ -63,21 +66,25 @@ LoggedMenuWrapper.Nav = styled.nav`
     `,
   })}
 
+  button {
+    background-color: transparent;
+  }
+
   img {
     width: 32px;
     height: 32px;
     border: 0;
   }
 
-  #home {
-    order: 2;
+  #h-home {
+    order: 3;
   }
 
-  #search {
+  #h-search {
     order: 1;
   }
 
-  #add {
+  #h-add {
     order: 2;
     img {
       width: 40px;
@@ -85,17 +92,50 @@ LoggedMenuWrapper.Nav = styled.nav`
     }
   }
 
-  #like {
+  #h-like {
     order: 4;
   }
 
-  #avatar {
+  #h-avatar {
     order: 5;
-    img {
-      border-radius: 50%;
-      border: 2px solid #D7385E;
-      border: 0;
-    }
+  }
+`;
+
+LoggedMenuWrapper.Avatar = styled.li`
+  img {
+    border-radius: 50%;
+    border: 2px solid #D7385E;
+    border: 0;
+  }
+`;
+
+LoggedMenuWrapper.Dropdown = styled.div`
+  display: none;
+  position: absolute;
+  background-color: #f1f1f1;
+  min-width: 160px;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 1;
+  float: right;
+  top: 65px;
+  right: 9%;
+  height: 96px;
+  border-radius: 8px;
+  a {
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+  }
+
+  ${LoggedMenuWrapper.Avatar}:hover + & {
+    background-color: #fff;
+    display: block;
+  }
+
+  &:hover {
+    background-color: #fff;
+    display: block;
   }
 `;
 

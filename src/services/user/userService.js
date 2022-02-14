@@ -20,11 +20,14 @@ const userService = (ctx) => {
             Authorization: `Bearer ${token}`,
           },
         });
+        const posts = response.data && response.data.length > 0
+          ? response.data.sort((x, y) => new Date(y.createdAt) - new Date(x.createdAt))
+          : [];
         return {
           user: {
             totalLikes: 100,
           },
-          posts: response.data,
+          posts,
         };
       } catch (error) {
         throw new Error('Não conseguimos pegar os posts');
