@@ -3,7 +3,7 @@
 import ProfileScreenPageObject from '../../../../src/components/screens/app/ProfileScreen/ProfileScreen.pageObject';
 import { LOGIN_APP_TOKEN_APP } from '../../../../src/services/login/loginService';
 
-describe('/pages/app/profile', () => {
+describe.skip('/pages/app/profile', () => {
   before(() => {
     cy.intercept('https://instalura-api-git-master-omariosouto.vercel.app/api/login')
       .as('userLogin');
