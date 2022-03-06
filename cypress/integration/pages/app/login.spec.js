@@ -3,7 +3,7 @@
 import LoginScreenPageObject from '../../../../src/components/screens/app/LoginScreen/LoginScreen.pageObject';
 import { LOGIN_APP_TOKEN_APP } from '../../../../src/services/login/loginService';
 
-describe('/pages/app/login', () => {
+describe.skip('/pages/app/login', () => {
   // it === test que estamos fazendo
   describe('when fill and submit a form login request', () => {
     it('go to the profile page', () => {
