@@ -64,6 +64,17 @@ jobs:
     name: Integration Tests
     runs-on: ubuntu-latest # The type of runner that the job will run on
     steps: # Steps represent a sequence of tasks that will be executed as part of the job
+      - name: Set env E2E Tests
+        env:
+          E2E_TESTS: ${{ secrets.E2E_TESTS }}
+        run: |
+          echo "E2E_TESTS=$E2E_TESTS" >> "$GITHUB_ENV"     
+      - name: Skip E2E Tests?
+        if: env.E2E_TESTS != 'true'
+        run: |
+          echo "$E2E_TESTS"
+          exit 0
+
       # [Pre Build-step]
       - uses: actions/checkout@v2 ## Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/setup-node@v1
