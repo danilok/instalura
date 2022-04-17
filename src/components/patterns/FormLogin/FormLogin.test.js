@@ -44,14 +44,20 @@ describe('<FormLogin />', () => {
 
   describe('when form fields are invalid', () => {
     test('displays the respective errors', async () => {
-      render(<FormLogin onSubmit={onSubmit} />);
+      await act(async () => render(
+        <FormLogin
+          onSubmit={onSubmit}
+        />,
+      ));
 
       const button = screen.getByRole('button');
       expect(button).toBeDisabled();
 
       const inputUsuario = screen.getByPlaceholderText('Usuário');
       inputUsuario.focus();
-      inputUsuario.blur();
+      act(() => {
+        inputUsuario.blur();
+      });
       await waitFor(() => screen.getByRole('alert'));
 
       expect(screen.getByRole('alert'))
