@@ -1,5 +1,5 @@
 import React from 'react';
-import user from '@testing-library/user-event';
+import UserEvent from '@testing-library/user-event';
 import FormLogin from './index';
 import {
   render,
@@ -16,6 +16,7 @@ onSubmit.mockImplementation((event) => {
 describe('<FormLogin />', () => {
   describe('when form fields are valid', () => {
     test('complete the submission', async () => {
+      const user = UserEvent.setup();
       await act(async () => render(
         <FormLogin
           onSubmit={onSubmit}
@@ -26,16 +27,16 @@ describe('<FormLogin />', () => {
       expect(button).toBeDisabled();
 
       const inputUsuario = screen.getByPlaceholderText('Usuário');
-      user.type(inputUsuario, 'someusername');
+      await user.type(inputUsuario, 'someusername');
       await waitFor(() => expect(inputUsuario).toHaveValue('someusername'));
 
       const inputSenha = screen.getByPlaceholderText('Senha');
-      user.type(inputSenha, 'somepassword');
+      await user.type(inputSenha, 'somepassword');
       await waitFor(() => expect(inputSenha).toHaveValue('somepassword'));
 
       expect(button).not.toBeDisabled();
 
-      user.click(button);
+      await user.click(button);
 
       expect(onSubmit).toHaveBeenCalledTimes(1);
     });

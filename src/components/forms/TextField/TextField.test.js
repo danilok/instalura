@@ -1,5 +1,5 @@
 import React from 'react';
-import user from '@testing-library/user-event';
+import UserEvent from '@testing-library/user-event';
 import { render, screen } from '../../../infra/test/testUtils';
 import TextField from './index';
 
@@ -21,7 +21,8 @@ describe('<TextField />', () => {
 
   describe('when field is valid', () => {
     describe('and user is typing', () => {
-      test('the value must be updated', () => {
+      test('the value must be updated', async () => {
+        const user = UserEvent.setup();
         const onChangeMock = jest.fn();
         render(
           <TextField
@@ -33,7 +34,7 @@ describe('<TextField />', () => {
           />,
         );
         const inputNome = screen.getByPlaceholderText(/nome/i);
-        user.type(inputNome, 'Danilo');
+        await user.type(inputNome, 'Danilo');
         expect(onChangeMock).toBeCalledTimes(6);
       });
     });
