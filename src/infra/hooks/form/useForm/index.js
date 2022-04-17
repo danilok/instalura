@@ -37,8 +37,11 @@ export default function useForm({
     }
   }
 
-  React.useEffect(async () => {
-    validate(values);
+  React.useEffect(() => {
+    async function validateData() {
+      validate(values);
+    }
+    validateData();
   }, [values]);
 
   return {
