@@ -21,21 +21,23 @@ export default function LoggedPageWrapper({
   const [isModalOpen, setModalState] = React.useState(false);
   const [posts, setPosts] = React.useState(profileProps.posts);
 
+  const value = React.useMemo(() => ({
+    toggleModalImagem: () => {
+      setModalState(!isModalOpen);
+    },
+    updatePosts: (post) => {
+      setPosts((currentValues) => ([
+        post,
+        ...currentValues,
+      ]));
+    },
+    posts,
+    user: profileProps.user,
+  }), [isModalOpen, posts]);
+
   return (
     <LoggedPageContext.Provider
-      value={{
-        toggleModalImagem: () => {
-          setModalState(!isModalOpen);
-        },
-        updatePosts: (post) => {
-          setPosts((currentValues) => ([
-            post,
-            ...currentValues,
-          ]));
-        },
-        posts,
-        user: profileProps.user,
-      }}
+      value={value}
     >
       <SEO
         {...seoProps}
