@@ -5,28 +5,26 @@ import Text from '../../foundation/Text';
 
 export default function FilterItem({ imageUrl, filter, handleFilter }) {
   return (
-    <>
-      <button
-        onClick={handleFilter}
-        type="button"
+    <button
+      onClick={handleFilter}
+      type="button"
+    >
+      <figure className={`filter-${filter}`}>
+        <img
+          src={imageUrl}
+          width="88px"
+          height="88px"
+          alt={filter}
+        />
+      </figure>
+      <Text
+        tag="span"
+        variant="smallestException"
+        color="tertiary.light"
       >
-        <figure className={`filter-${filter}`}>
-          <img
-            src={imageUrl}
-            width="88px"
-            height="88px"
-            alt={filter}
-          />
-        </figure>
-        <Text
-          tag="span"
-          variant="smallestException"
-          color="tertiary.light"
-        >
-          {filter}
-        </Text>
-      </button>
-    </>
+        {filter}
+      </Text>
+    </button>
   );
 }
 

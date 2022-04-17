@@ -21,14 +21,16 @@ export default function WebsitePageWrapper({
 }) {
   const [isModalOpen, setModalState] = React.useState(false);
 
+  const value = React.useMemo(() => ({
+    toggleModalCadastro: () => {
+      setModalState(!isModalOpen);
+    },
+    getCMSContent: (cmsKey) => get(messages, cmsKey),
+  }), [isModalOpen]);
+
   return (
     <WebsitePageContext.Provider
-      value={{
-        toggleModalCadastro: () => {
-          setModalState(!isModalOpen);
-        },
-        getCMSContent: (cmsKey) => get(messages, cmsKey),
-      }}
+      value={value}
     >
       <SEO
         {...seoProps}

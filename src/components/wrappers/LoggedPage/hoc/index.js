@@ -9,15 +9,18 @@ export default function LoggedPageHOC(
   PageComponent,
   { pageWrapperProps } = { pageWrapperProps: {} },
 ) {
-  return (props) => (
-    <LoggedGlobalProvider>
-      <LoggedPageWrapper
-        {...pageWrapperProps}
-        {...props.pageWrapperProps}
-        profileProps={props}
-      >
-        <PageComponent {...props} />
-      </LoggedPageWrapper>
-    </LoggedGlobalProvider>
-  );
+  function loggedPageHoc(props) {
+    return (
+      <LoggedGlobalProvider>
+        <LoggedPageWrapper
+          {...pageWrapperProps}
+          {...props.pageWrapperProps}
+          profileProps={props}
+        >
+          <PageComponent {...props} />
+        </LoggedPageWrapper>
+      </LoggedGlobalProvider>
+    );
+  }
+  return loggedPageHoc;
 }
