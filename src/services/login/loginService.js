@@ -12,9 +12,11 @@ const BASE_URL = isStagingEnv
 export const LOGIN_APP_TOKEN_APP = 'LOGIN_APP_TOKEN_APP';
 
 const loginService = {
-  async login({ username, password },
+  async login(
+    { username, password },
     setCookieModule = setCookie,
-    HttpClienteModule = HttpClient) {
+    HttpClienteModule = HttpClient,
+  ) {
     return HttpClienteModule(`${BASE_URL}/api/login`, {
       method: 'POST',
       body: {

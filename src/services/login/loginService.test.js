@@ -29,12 +29,10 @@ describe('loginService()', () => {
             password: 'somepassword',
           }, setCookieModule, HttpClientModule);
 
-          expect(setCookieModule).toHaveBeenCalledWith(
-            null, LOGIN_APP_TOKEN_APP, token, {
-              path: '/',
-              maxAge: 604800,
-            },
-          );
+          expect(setCookieModule).toHaveBeenCalledWith(null, LOGIN_APP_TOKEN_APP, token, {
+            path: '/',
+            maxAge: 604800,
+          });
           expect(loginServiceResponse).toEqual({ token });
         });
       });
