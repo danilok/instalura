@@ -21,7 +21,7 @@
     "@crello/react-lottie": "^0.0.11",
     "framer-motion": "^7.1.0",
     "graphql": "^16.6.0",
-    "graphql-request": "^4.3.0",
+    "graphql-request": "^5.0.0",
     "jsonwebtoken": "^8.5.1",
     "lodash": "^4.17.21",
     "next": "latest",
