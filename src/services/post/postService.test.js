@@ -41,7 +41,7 @@ describe('postService()', () => {
           HttpClientModule,
         );
 
-        expect(getToken).toBeCalledTimes(1);
+        expect(getToken).toHaveBeenCalledTimes(1);
         expect(postServiceResponse.data).toEqual(post);
       });
     });
@@ -56,7 +56,7 @@ describe('postService()', () => {
           HttpClientLikeModule,
         );
 
-        expect(getToken).toBeCalledTimes(1);
+        expect(getToken).toHaveBeenCalledTimes(1);
         expect(postServiceResponse.data).toEqual({ id, ...post });
       });
     });
