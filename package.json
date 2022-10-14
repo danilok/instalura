@@ -19,7 +19,7 @@
   },
   "dependencies": {
     "@crello/react-lottie": "^0.0.11",
-    "framer-motion": "^7.2.1",
+    "framer-motion": "^7.5.3",
     "graphql": "^16.6.0",
     "graphql-request": "^5.0.0",
     "jsonwebtoken": "^8.5.1",
