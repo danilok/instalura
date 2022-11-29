@@ -12,6 +12,8 @@ const onSubmit = jest.fn();
 onSubmit.mockImplementation((event) => {
   event.preventDefault();
 });
+// eslint-disable-next-line global-require
+jest.mock('next/router', () => require('next-router-mock'));
 
 describe('<FormLogin />', () => {
   describe('when form fields are valid', () => {
