@@ -19,9 +19,9 @@ jobs:
     steps:
       # [[AJUSTES GERAIS]]
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
       # Set node version
-      - uses: actions/setup-node@v1
+      - uses: actions/setup-node@v3
         with:
           node-version: '18.12.0'
 
@@ -40,8 +40,8 @@ jobs:
     runs-on: ubuntu-latest # The type of runner that the job will run on
     steps: # Steps represent a sequence of tasks that will be executed as part of the job
       # [Pre Build-step]
-      - uses: actions/checkout@v2 ## Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
-      - uses: actions/setup-node@v1
+      - uses: actions/checkout@v3 ## Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
+      - uses: actions/setup-node@v3
         with:
           node-version: '18.12.0'
       - name: Get yarn cache directory path
@@ -76,9 +76,9 @@ jobs:
           exit 0
 
       # [Pre Build-step]
-      - uses: actions/checkout@v2 ## Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
+      - uses: actions/checkout@v3 ## Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
         if: env.E2E_TESTS != 'true'
-      - uses: actions/setup-node@v1
+      - uses: actions/setup-node@v3
         if: env.E2E_TESTS != 'true'
         with:
           node-version: '18.12.0'
