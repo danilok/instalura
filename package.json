@@ -22,7 +22,7 @@
     "framer-motion": "^10.16.4",
     "graphql": "^16.8.1",
     "graphql-request": "^6.1.0",
-    "jsonwebtoken": "^9.0.0",
+    "jsonwebtoken": "^9.0.2",
     "lodash": "^4.17.21",
     "next": "latest",
     "nookies": "^2.5.2",
