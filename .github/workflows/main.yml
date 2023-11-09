@@ -23,7 +23,7 @@ jobs:
       # Set node version
       - uses: actions/setup-node@v3
         with:
-          node-version: '18.12.0'
+          node-version: '18.17.0'
 
       # Prints out node version
       - name: Node Version
