@@ -1352,17 +1352,12 @@
   resolved "https://registry.yarnpkg.com/@types/node/-/node-20.5.1.tgz#178d58ee7e4834152b0e8b4d30cbfab578b9bb30"
   integrity sha512-4tT2UrL5LBqDwoed9wZ6N3umC4Yhz3W3FloMmiiG4JwmUJWpie0c7lcnUNd4gtMKuDEO4wRVS8B6Xa0uMRsMKg==
 
-"@types/node@^18.11.9":
+"@types/node@^18.11.9", "@types/node@^18.17.5":
   version "18.19.0"
   resolved "https://registry.yarnpkg.com/@types/node/-/node-18.19.0.tgz#e86ce256c46661016fa83360bf8738eb4efdc88c"
   integrity sha512-667KNhaD7U29mT5wf+TZUnrzPrlL2GNQ5N0BMjO2oNULhBxX0/FKCkm6JMu0Jh7Z+1LwUlR21ekd7KhIboNFNw==
   dependencies:
     undici-types "~5.26.4"
-
-"@types/node@^18.17.5":
-  version "18.18.3"
-  resolved "https://registry.yarnpkg.com/@types/node/-/node-18.18.3.tgz#e5188135fc2909b46530c798ef49be65083be3fd"
-  integrity sha512-0OVfGupTl3NBFr8+iXpfZ8NR7jfFO+P1Q+IO/q0wbo02wYkP5gy36phojeYWpLQ6WAMjl+VfmqUk2YbUfp0irA==
 
 "@types/normalize-package-data@^2.4.0":
   version "2.4.1"
@@ -2462,10 +2457,10 @@ csstype@^3.0.2:
   resolved "https://registry.yarnpkg.com/csstype/-/csstype-3.0.8.tgz#d2266a792729fb227cd216fb572f43728e1ad340"
   integrity sha512-jXKhWqXPmlUeoQnF/EhTtTl4C9SnrxSH/jZUih3jmO6lBKr99rP3/+FmrMj4EFpOXzMtXHAZkd3x0E6h6Fgflw==
 
-cypress@^13.3.0:
-  version "13.3.0"
-  resolved "https://registry.yarnpkg.com/cypress/-/cypress-13.3.0.tgz#d00104661b337d662c5a4280a051ee59f8aa1e31"
-  integrity sha512-mpI8qcTwLGiA4zEQvTC/U1xGUezVV4V8HQCOYjlEOrVmU1etVvxOjkCXHGwrlYdZU/EPmUiWfsO3yt1o+Q2bgw==
+cypress@^13.6.0:
+  version "13.6.0"
+  resolved "https://registry.yarnpkg.com/cypress/-/cypress-13.6.0.tgz#b98b7b837679012ed09c7ecee5565bf7b31d4982"
+  integrity sha512-quIsnFmtj4dBUEJYU4OH0H12bABJpSujvWexC24Ju1gTlKMJbeT6tTO0vh7WNfiBPPjoIXLN+OUqVtiKFs6SGw==
   dependencies:
     "@cypress/request" "^3.0.0"
     "@cypress/xvfb" "^1.2.4"
